@@ -1,6 +1,6 @@
 {
-  "PRD_md": "1Unified Ultimate PRD.md",
-  "Timeline": "Timeline.json",
+  "PRD_md": "Project_Management/1Unified Ultimate PRD.md",
+  "Timeline": "Project_Management/Timeline.json",
   "Tasklist": {
     "Design": [
       "Tasklist/Design/UI_UX.md",
@@ -34,5 +34,5 @@
       "Tasklist/Documentation/Guides.md"
     ]
   },
-  "QA_Risk": "QA_Risk.json"
+  "QA_Risk": "Project_Management/QA_Risk.json"
 }
