@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoterDome - Settings & Preferences</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #4f46e5;
+        }
+
+        .header p {
+            color: #888888;
+            font-size: 1.1em;
+        }
+
+        .settings-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            height: calc(100vh - 150px);
+        }
+
+        .navigation-sidebar {
+            background-color: #222222;
+            border-radius: 12px;
+            border: 1px solid #333333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-title {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #9ca3af;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            transition: all 0.2s;
+            color: #d1d5db;
+        }
+
+        .nav-item:hover {
+            background-color: #3d3d3d;
+            color: white;
+        }
+
+        .nav-item.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+        .nav-item i {
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
+
+        .settings-content {
+            background-color: #1f1f1f;
+            border-radius: 12px;
+            border: 1px solid #333333;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .settings-header {
+            padding: 24px;
+            border-bottom: 1px solid #333333;
+            background-color: #222222;
+        }
+
+        .settings-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .settings-subtitle {
+            color: #9ca3af;
+            font-size: 1em;
+        }
+
+        .settings-body {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .settings-section {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #333333;
+        }
+
+        .settings-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #e5e7eb;
+        }
+
+        .section-description {
+            color: #9ca3af;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #e5e7eb;
+        }
+
+        .form-description {
+            display: block;
+            margin-top: 4px;
+            color: #9ca3af;
+            font-size: 0.9em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            color: white;
+            font-size: 1em;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            color: white;
+            font-size: 1em;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            accent-color: #4f46e5;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #4b5563;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4f46e5;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 16px;
+            margin: 12px 0;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #4f46e5;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 1em;
+        }
+
+        .btn-primary {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #4338ca;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #d1d5db;
+            border: 1px solid #444444;
+        }
+
+        .btn-outline:hover {
+            background-color: #3d3d3d;
+        }
+
+        .btn-danger {
+            background-color: #dc2626;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #b91c1c;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .profile-email {
+            color: #9ca3af;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #333333;
+            margin: 20px 0;
+        }
+
+        .theme-preview {
+            display: flex;
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        .theme-option {
+            flex: 1;
+            padding: 16px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .theme-option.selected {
+            border-color: #4f46e5;
+        }
+
+        .theme-light {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .theme-dark {
+            background: linear-gradient(135deg, #1f2937, #111827);
+        }
+
+        .theme-auto {
+            background: linear-gradient(135deg, #f8f9fa 50%, #1f2937 50%);
+        }
+
+        .sync-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            margin: 12px 0;
+        }
+
+        .sync-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #10b981;
+        }
+
+        .sync-indicator.offline {
+            background-color: #ef4444;
+        }
+
+        .keyboard-shortcuts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background-color: #2d2d2d;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+
+        .shortcut-key {
+            background-color: #4b5563;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .navigation-sidebar {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NoterDome Settings</h1>
+            <p>Customize your experience and manage your account preferences</p>
+        </div>
+
+        <div class="settings-container">
+            <div class="navigation-sidebar">
+                <div class="nav-section">
+                    <div class="nav-title">Account</div>
+                    <div class="nav-item active">
+                        <i>👤</i>
+                        <span>Profile</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>🔒</i>
+                        <span>Security</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>💳</i>
+                        <span>Billing</span>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-title">Preferences</div>
+                    <div class="nav-item">
+                        <i>🎨</i>
+                        <span>Appearance</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>⌨️</i>
+                        <span>Keyboard</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>🔔</i>
+                        <span>Notifications</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>🌍</i>
+                        <span>Language</span>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-title">Features</div>
+                    <div class="nav-item">
+                        <i>🔄</i>
+                        <span>Synchronization</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>🔍</i>
+                        <span>Search</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>📊</i>
+                        <span>Analytics</span>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-title">Advanced</div>
+                    <div class="nav-item">
+                        <i>⚙️</i>
+                        <span>General</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>🔌</i>
+                        <span>Integrations</span>
+                    </div>
+                    <div class="nav-item">
+                        <i>📝</i>
+                        <span>Export</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-content">
+                <div class="settings-header">
+                    <div class="settings-title">Profile Settings</div>
+                    <div class="settings-subtitle">Manage your account information and preferences</div>
+                </div>
+
+                <div class="settings-body">
+                    <div class="settings-section">
+                        <div class="profile-header">
+                            <div class="avatar">JD</div>
+                            <div class="profile-info">
+                                <div class="profile-name">John Doe</div>
+                                <div class="profile-email">john.doe@example.com</div>
+                                <div class="sync-status">
+                                    <div class="sync-indicator"></div>
+                                    <span>Synced across all devices</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-input" value="John">
+                            </div>
+                            <div class="form-col">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-input" value="Doe">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" value="john.doe@example.com">
+                            <span class="form-description">This is your primary email for account notifications</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Bio</label>
+                            <textarea class="form-input" rows="3" placeholder="Tell us about yourself...">Product designer passionate about creating beautiful, functional user experiences. Love coffee and good design.</textarea>
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn btn-primary">Save Changes</button>
+                            <button class="btn btn-outline">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <div class="section-title">Appearance</div>
+                        <div class="section-description">
+                            Customize the look and feel of NoterDome to match your preferences.
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Theme</label>
+                            <div class="theme-preview">
+                                <div class="theme-option theme-light selected" data-theme="light">
+                                    <div style="padding: 8px; color: #333; font-weight: 500;">Light</div>
+                                </div>
+                                <div class="theme-option theme-dark" data-theme="dark">
+                                    <div style="padding: 8px; color: #fff; font-weight: 500;">Dark</div>
+                                </div>
+                                <div class="theme-option theme-auto" data-theme="auto">
+                                    <div style="padding: 8px; color: #fff; font-weight: 500;">Auto</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Accent Color</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="accent" value="indigo" checked>
+                                    <span>Indigo</span>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="accent" value="blue">
+                                    <span>Blue</span>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="accent" value="green">
+                                    <span>Green</span>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="accent" value="purple">
+                                    <span>Purple</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Font Size</label>
+                            <select class="form-select">
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option selected>Large</option>
+                                <option>Extra Large</option>
+                            </select>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="reduced-motion" checked>
+                            <label for="reduced-motion">Reduce motion and animations</label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <div class="section-title">Notifications</div>
+                        <div class="section-description">
+                            Control which notifications you receive and how you receive them.
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="email-notifications" checked>
+                            <label for="email-notifications">Email notifications</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="desktop-notifications" checked>
+                            <label for="desktop-notifications">Desktop notifications</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="mobile-notifications">
+                            <label for="mobile-notifications">Mobile app notifications</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Notification Schedule</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="schedule" value="all-day" checked>
+                                    <span>All Day</span>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="schedule" value="work-hours">
+                                    <span>Work Hours (9AM - 6PM)</span>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="schedule" value="custom">
+                                    <span>Custom</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <div class="section-title">Keyboard Shortcuts</div>
+                        <div class="section-description">
+                            Manage your preferred keyboard shortcuts for faster navigation.
+                        </div>
+
+                        <div class="keyboard-shortcuts">
+                            <div class="shortcut-item">
+                                <span>Quick Capture</span>
+                                <div class="shortcut-key">Ctrl+Shift+N</div>
+                            </div>
+                            <div class="shortcut-item">
+                                <span>Search</span>
+                                <div class="shortcut-key">Cmd+K</div>
+                            </div>
+                            <div class="shortcut-item">
+                                <span>New Note</span>
+                                <div class="shortcut-key">Ctrl+N</div>
+                            </div>
+                            <div class="shortcut-item">
+                                <span>Save Note</span>
+                                <div class="shortcut-key">Ctrl+S</div>
+                            </div>
+                            <div class="shortcut-item">
+                                <span>Format Bold</span>
+                                <div class="shortcut-key">Ctrl+B</div>
+                            </div>
+                            <div class="shortcut-item">
+                                <span>Format Italic</span>
+                                <div class="shortcut-key">Ctrl+I</div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="vim-mode">
+                            <label for="vim-mode">Enable Vim-style navigation</label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <div class="section-title">Data & Privacy</div>
+                        <div class="section-description">
+                            Control how your data is stored and shared.
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="data-sync" checked>
+                            <label for="data-sync">Sync data across devices</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="analytics" checked>
+                            <label for="analytics">Share anonymous usage data</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="personalization">
+                            <label for="personalization">Personalize recommendations</label>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="button-group">
+                            <button class="btn btn-danger">Delete Account</button>
+                            <button class="btn btn-outline">Export Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // In a real app, this would load the corresponding settings section
+                const title = this.querySelector('span').textContent;
+                document.querySelector('.settings-title').textContent = `${title} Settings`;
+            });
+        });
+
+        // Theme selection
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.theme-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+
+        // Save changes button
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            alert('Settings saved successfully!');
+        });
+
+        // Delete account button
+        document.querySelector('.btn-danger').addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                alert('Account deletion process started. Please check your email for next steps.');
+            }
+        });
+
+        // Export data button
+        document.querySelector('.btn-outline').addEventListener('click', function() {
+            if (this.textContent === 'Export Data') {
+                alert('Export initiated. Your data will be sent to your email shortly.');
+            }
+        });
+    </script>
+</body>
+</html>

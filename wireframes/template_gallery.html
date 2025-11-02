@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoterDome - Template Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #4f46e5;
+        }
+
+        .header p {
+            color: #888888;
+            font-size: 1.1em;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            height: calc(100vh - 180px);
+        }
+
+        .filters-sidebar {
+            background-color: #222222;
+            border-radius: 12px;
+            border: 1px solid #333333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .filters-header {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #e5e7eb;
+        }
+
+        .filter-section {
+            margin-bottom: 24px;
+        }
+
+        .filter-title {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #d1d5db;
+            margin-bottom: 12px;
+        }
+
+        .filter-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .filter-item:hover {
+            background-color: #3d3d3d;
+        }
+
+        .filter-item.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+        .filter-item-count {
+            background-color: #4b5563;
+            border-radius: 12px;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            margin-left: auto;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 14px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .gallery-content {
+            background-color: #1f1f1f;
+            border-radius: 12px;
+            border: 1px solid #333333;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .gallery-header {
+            padding: 20px;
+            border-bottom: 1px solid #333333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #222222;
+        }
+
+        .gallery-title {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+        }
+
+        .view-btn {
+            padding: 8px 12px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .view-btn.active {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+
+        .templates-grid {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .template-card {
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #4f46e5;
+        }
+
+        .template-preview {
+            height: 160px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .template-info {
+            padding: 16px;
+        }
+
+        .template-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #e5e7eb;
+        }
+
+        .template-description {
+            font-size: 0.9em;
+            color: #9ca3af;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .template-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8em;
+            color: #9ca3af;
+        }
+
+        .template-author {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .author-avatar {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6em;
+            color: white;
+        }
+
+        .template-stats {
+            display: flex;
+            gap: 8px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .use-template-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .use-template-btn:hover {
+            background-color: #4338ca;
+        }
+
+        .template-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .tag {
+            background-color: #3d3d3d;
+            color: #d1d5db;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7em;
+        }
+
+        .template-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #10b981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .favorites-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: rgba(31, 31, 31, 0.8);
+            color: #9ca3af;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        .favorites-btn:hover {
+            color: #f59e0b;
+        }
+
+        .favorites-btn.active {
+            color: #f59e0b;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            gap: 8px;
+        }
+
+        .page-btn {
+            padding: 8px 12px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .page-btn.active {
+            background-color: #4f46e5;
+        }
+
+        /* Modal for template preview */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #222222;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid #444444;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #333333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-preview {
+            height: 400px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .modal-info {
+            margin-bottom: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .use-btn {
+            background-color: #4f46e5;
+            color: white;
+            flex: 1;
+        }
+
+        .save-btn {
+            background-color: #2d2d2d;
+            color: white;
+            border: 1px solid #444444;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .filters-sidebar {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .templates-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NoterDome Template Gallery</h1>
+            <p>Discover and use beautiful templates for your notes, projects, and workflows</p>
+        </div>
+
+        <div class="gallery-container">
+            <div class="filters-sidebar">
+                <div class="filter-section">
+                    <input type="text" class="search-bar" placeholder="Search templates...">
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-title">Categories</div>
+                    <div class="filter-item active">
+                        <span>🎨</span>
+                        <span>All Templates</span>
+                        <span class="filter-item-count">24</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>📝</span>
+                        <span>Meeting Notes</span>
+                        <span class="filter-item-count">8</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>📊</span>
+                        <span>Project Tracking</span>
+                        <span class="filter-item-count">6</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>📅</span>
+                        <span>Planning</span>
+                        <span class="filter-item-count">5</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>📚</span>
+                        <span>Learning</span>
+                        <span class="filter-item-count">3</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>💼</span>
+                        <span>Business</span>
+                        <span class="filter-item-count">2</span>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-title">Popular Tags</div>
+                    <div class="filter-item">
+                        <span>#</span>
+                        <span>Productivity</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>#</span>
+                        <span>Workflow</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>#</span>
+                        <span>Planning</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>#</span>
+                        <span>Organization</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>#</span>
+                        <span>Team</span>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-title">Sort By</div>
+                    <div class="filter-item active">
+                        <span>⭐</span>
+                        <span>Popular</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>🆕</span>
+                        <span>Newest</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>👍</span>
+                        <span>Most Used</span>
+                    </div>
+                    <div class="filter-item">
+                        <span>❤️</span>
+                        <span>My Favorites</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-content">
+                <div class="gallery-header">
+                    <div class="gallery-title">All Templates</div>
+                    <div class="view-toggle">
+                        <button class="view-btn active">Grid</button>
+                        <button class="view-btn">List</button>
+                    </div>
+                </div>
+
+                <div class="templates-grid">
+                    <!-- Template 1 -->
+                    <div class="template-card" data-template-id="1">
+                        <div class="template-preview">
+                            Meeting Notes Template
+                            <div class="template-badge">Popular</div>
+                        </div>
+                        <button class="favorites-btn">♡</button>
+                        <div class="template-info">
+                            <div class="template-title">Meeting Notes</div>
+                            <div class="template-description">Structured template for capturing meeting notes, action items, and decisions.</div>
+                            <div class="template-meta">
+                                <div class="template-author">
+                                    <div class="author-avatar">JD</div>
+                                    <span>John Doe</span>
+                                </div>
+                                <div class="template-stats">
+                                    <div class="stat-item">👍 245</div>
+                                    <div class="stat-item">⭐ 4.8</div>
+                                </div>
+                            </div>
+                            <div class="template-tags">
+                                <span class="tag">meeting</span>
+                                <span class="tag">notes</span>
+                                <span class="tag">team</span>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 2 -->
+                    <div class="template-card" data-template-id="2">
+                        <div class="template-preview">
+                            Project Tracker
+                        </div>
+                        <button class="favorites-btn">♡</button>
+                        <div class="template-info">
+                            <div class="template-title">Project Tracker</div>
+                            <div class="template-description">Track project progress, milestones, and team responsibilities.</div>
+                            <div class="template-meta">
+                                <div class="template-author">
+                                    <div class="author-avatar">JS</div>
+                                    <span>Jane Smith</span>
+                                </div>
+                                <div class="template-stats">
+                                    <div class="stat-item">👍 189</div>
+                                    <div class="stat-item">⭐ 4.7</div>
+                                </div>
+                            </div>
+                            <div class="template-tags">
+                                <span class="tag">project</span>
+                                <span class="tag">tracking</span>
+                                <span class="tag">management</span>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 3 -->
+                    <div class="template-card" data-template-id="3">
+                        <div class="template-preview">
+                            Daily Journal
+                        </div>
+                        <button class="favorites-btn">♡</button>
+                        <div class="template-info">
+                            <div class="template-title">Daily Journal</div>
+                            <div class="template-description">Reflect on your day with prompts for gratitude, wins, and improvements.</div>
+                            <div class="template-meta">
+                                <div class="template-author">
+                                    <div class="author-avatar">MJ</div>
+                                    <span>Mike Johnson</span>
+                                </div>
+                                <div class="template-stats">
+                                    <div class="stat-item">👍 312</div>
+                                    <div class="stat-item">⭐ 4.9</div>
+                                </div>
+                            </div>
+                            <div class="template-tags">
+                                <span class="tag">journal</span>
+                                <span class="tag">reflection</span>
+                                <span class="tag">personal</span>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 4 -->
+                    <div class="template-card" data-template-id="4">
+                        <div class="template-preview">
+                            Brainstorming
+                        </div>
+                        <button class="favorites-btn">♡</button>
+                        <div class="template-info">
+                            <div class="template-title">Brainstorming</div>
+                            <div class="template-description">Capture ideas freely with structured organization for later refinement.</div>
+                            <div class="template-meta">
+                                <div class="template-author">
+                                    <div class="author-avatar">AS</div>
+                                    <span>Alice Smith</span>
+                                </div>
+                                <div class="template-stats">
+                                    <div class="stat-item">👍 156</div>
+                                    <div class="stat-item">⭐ 4.6</div>
+                                </div>
+                            </div>
+                            <div class="template-tags">
+                                <span class="tag">ideas</span>
+                                <span class="tag">creativity</span>
+                                <span class="tag">planning</span>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 5 -->
+                    <div class="template-card" data-template-id="5">
+                        <div class="template-preview">
+                            Research Notes
+                        </div>
+                        <button class="favorites-btn">♡</button>
+                        <div class="template-info">
+                            <div class="template-title">Research Notes</div>
+                            <div class="template-description">Organize research with source tracking, key points, and analysis.</div>
+                            <div class="template-meta">
+                                <div class="template-author">
+                                    <div class="author-avatar">TB</div>
+                                    <span>Tom Brown</span>
+                                </div>
+                                <div class="template-stats">
+                                    <div class="stat-item">👍 278</div>
+                                    <div class="stat-item">⭐ 4.8</div>
+                                </div>
+                            </div>
+                            <div class="template-tags">
+                                <span class="tag">research</span>
+                                <span class="tag">academic</span>
+                                <span class="tag">organization</span>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 6 -->
+                    <div class="template-card" data-template-id="6">
+                        <div class="template-preview">
+                            Habit Tracker
+                        </div>
+                        <button class="favorites-btn">♡</button>
+                        <div class="template-info">
+                            <div class="template-title">Habit Tracker</div>
+                            <div class="template-description">Build and maintain good habits with visual tracking and insights.</div>
+                            <div class="template-meta">
+                                <div class="template-author">
+                                    <div class="author-avatar">SW</div>
+                                    <span>Sarah Wilson</span>
+                                </div>
+                                <div class="template-stats">
+                                    <div class="stat-item">👍 203</div>
+                                    <div class="stat-item">⭐ 4.7</div>
+                                </div>
+                            </div>
+                            <div class="template-tags">
+                                <span class="tag">habits</span>
+                                <span class="tag">productivity</span>
+                                <span class="tag">personal</span>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 7 -->
+                    <div class="template-card" data-template-id="7">
+                        <div class="template-preview">
+                            Meeting Agenda
+                        </div>
+                        <button class="favorites-btn">♡</button>
+                        <div class="template-info">
+                            <div class="template-title">Meeting Agenda</div>
+                            <div class="template-description">Plan effective meetings with clear objectives, time allocations, and follow-ups.</div>
+                            <div class="template-meta">
+                                <div class="template-author">
+                                    <div class="author-avatar">JD</div>
+                                    <span>John Doe</span>
+                                </div>
+                                <div class="template-stats">
+                                    <div class="stat-item">👍 145</div>
+                                    <div class="stat-item">⭐ 4.5</div>
+                                </div>
+                            </div>
+                            <div class="template-tags">
+                                <span class="tag">meeting</span>
+                                <span class="tag">planning</span>
+                                <span class="tag">team</span>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 8 -->
+                    <div class="template-card" data-template-id="8">
+                        <div class="template-preview">
+                            Goal Setting
+                        </div>
+                        <button class="favorites-btn">♡</button>
+                        <div class="template-info">
+                            <div class="template-title">Goal Setting</div>
+                            <div class="template-description">Set SMART goals with action plans, milestones, and progress tracking.</div>
+                            <div class="template-meta">
+                                <div class="template-author">
+                                    <div class="author-avatar">JS</div>
+                                    <span>Jane Smith</span>
+                                </div>
+                                <div class="template-stats">
+                                    <div class="stat-item">👍 289</div>
+                                    <div class="stat-item">⭐ 4.9</div>
+                                </div>
+                            </div>
+                            <div class="template-tags">
+                                <span class="tag">goals</span>
+                                <span class="tag">planning</span>
+                                <span class="tag">productivity</span>
+                            </div>
+                            <button class="use-template-btn">Use Template</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Detail Modal -->
+    <div class="modal" id="templateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Template Title</div>
+                <button class="close-btn" id="closeModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-preview" id="modalPreview">
+                    Template Preview
+                </div>
+                <div class="modal-info">
+                    <h3 id="modalDescription">Template description goes here...</h3>
+                    <p>This template includes sections for organizing your content effectively. It comes with pre-defined structure and formatting to help you get started quickly. The template is fully customizable to fit your specific needs.</p>
+                    <div class="template-meta">
+                        <div class="template-author">
+                            <div class="author-avatar">JD</div>
+                            <span>By John Doe</span>
+                        </div>
+                        <div class="template-stats">
+                            <div class="stat-item">👍 245 uses</div>
+                            <div class="stat-item">⭐ 4.8 rating</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn use-btn" id="useTemplateBtn">Use This Template</button>
+                    <button class="modal-btn save-btn" id="saveTemplateBtn">Save to Favorites</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('templateModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalPreview = document.getElementById('modalPreview');
+        const modalDescription = document.getElementById('modalDescription');
+        const useTemplateBtn = document.getElementById('useTemplateBtn');
+        const saveTemplateBtn = document.getElementById('saveTemplateBtn');
+
+        // Open modal when template card is clicked
+        document.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.classList.contains('use-template-btn') || 
+                    e.target.classList.contains('favorites-btn')) {
+                    return; // Don't open modal if clicking buttons
+                }
+
+                const templateId = this.getAttribute('data-template-id');
+                const title = this.querySelector('.template-title').textContent;
+                const description = this.querySelector('.template-description').textContent;
+                
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                modalPreview.textContent = `${title} Preview`;
+                
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside content
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Use template button
+        useTemplateBtn.addEventListener('click', function() {
+            alert('Template applied to your workspace!');
+            modal.style.display = 'none';
+        });
+
+        // Save to favorites
+        saveTemplateBtn.addEventListener('click', function() {
+            alert('Template added to favorites!');
+        });
+
+        // Favorites button functionality
+        document.querySelectorAll('.favorites-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+                if (this.classList.contains('active')) {
+                    this.textContent = '♥';
+                    this.style.color = '#f59e0b';
+                } else {
+                    this.textContent = '♡';
+                    this.style.color = '';
+                }
+            });
+        });
+
+        // Use template buttons
+        document.querySelectorAll('.use-template-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.template-card');
+                const title = card.querySelector('.template-title').textContent;
+                alert(`Using template: ${title}`);
+            });
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.filter-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // View toggle
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // Pagination
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.textContent === 'Next') {
+                    alert('Loading next page...');
+                } else {
+                    document.querySelectorAll('.page-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-bar').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            document.querySelectorAll('.template-card').forEach(card => {
+                const title = card.querySelector('.template-title').textContent.toLowerCase();
+                const description = card.querySelector('.template-description').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || 
+                    tags.some(tag => tag.includes(searchTerm))) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

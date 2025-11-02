@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoterDome - Graph Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            grid-template-rows: 60px 1fr 40px;
+            height: 100vh;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background-color: #222222;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border: 1px solid #333333;
+        }
+
+        .header h1 {
+            font-size: 1.2em;
+            color: #4f46e5;
+        }
+
+        /* Left Panel - Controls */
+        .left-panel {
+            background-color: #222222;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border: 1px solid #333333;
+            overflow-y: auto;
+        }
+
+        .panel-section {
+            margin-bottom: 15px;
+        }
+
+        .panel-title {
+            font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #e5e7eb;
+        }
+
+        .filter-item {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background-color: #2d2d2d;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .filter-item:hover {
+            background-color: #3d3d3d;
+        }
+
+        .filter-item.active {
+            background-color: #4f46e5;
+        }
+
+        .slider-container {
+            margin: 10px 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #d1d5db;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            background-color: #444444;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background-color: #4f46e5;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 12px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            color: white;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #4338ca;
+        }
+
+        /* Main Graph Area */
+        .graph-container {
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            border: 1px solid #333333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .graph-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Right Panel - Node Details */
+        .right-panel {
+            background-color: #222222;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #333333;
+            overflow-y: auto;
+        }
+
+        .node-details-header {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333333;
+        }
+
+        .node-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 5px;
+        }
+
+        .node-type {
+            font-size: 0.8em;
+            color: #9ca3af;
+        }
+
+        .node-info {
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            color: #9ca3af;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            color: #e5e7eb;
+            margin-bottom: 10px;
+        }
+
+        .node-links {
+            margin-top: 15px;
+        }
+
+        .link-item {
+            padding: 8px;
+            background-color: #2d2d2d;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .link-item:hover {
+            background-color: #3d3d3d;
+        }
+
+        /* Bottom Controls */
+        .bottom-controls {
+            grid-column: 2 / 3;
+            background-color: #222222;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: 1px solid #333333;
+        }
+
+        .zoom-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .zoom-btn {
+            width: 32px;
+            height: 32px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-btn:hover {
+            background-color: #3d3d3d;
+        }
+
+        .zoom-display {
+            margin: 0 10px;
+            color: #d1d5db;
+        }
+
+        /* Graph elements styling */
+        .node {
+            fill: #4f46e5;
+            stroke: #6366f1;
+            stroke-width: 2;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .node:hover {
+            stroke-width: 3;
+            filter: drop-shadow(0 0 8px rgba(79, 70, 229, 0.5));
+        }
+
+        .node.selected {
+            stroke: #f59e0b;
+            stroke-width: 3;
+            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.7));
+        }
+
+        .link {
+            stroke: #4b5563;
+            stroke-width: 1.5;
+            stroke-opacity: 0.6;
+        }
+
+        .text {
+            fill: #ffffff;
+            font-size: 12px;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        /* Loading state */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* Toggle button for panels */
+        .toggle-btn {
+            position: absolute;
+            top: 10px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-left {
+            left: 10px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .toggle-right {
+            right: 10px;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 250px 1fr 250px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto;
+            }
+            
+            .left-panel, .right-panel {
+                grid-column: 1;
+                order: 1;
+            }
+            
+            .header {
+                order: 0;
+            }
+            
+            .graph-container {
+                order: 2;
+            }
+            
+            .bottom-controls {
+                grid-column: 1;
+                order: 3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>NoterDome Graph Visualization</h1>
+        </div>
+
+        <!-- Left Panel - Controls -->
+        <div class="left-panel">
+            <div class="panel-section">
+                <div class="panel-title">Search & Filter</div>
+                <input type="text" class="search-input" placeholder="Search nodes...">
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-title">Node Types</div>
+                <div class="filter-item active" data-filter="all">All Nodes (24)</div>
+                <div class="filter-item" data-filter="page">Pages (15)</div>
+                <div class="filter-item" data-filter="database">Databases (5)</div>
+                <div class="filter-item" data-filter="note">Notes (4)</div>
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-title">Connection Depth</div>
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Depth: <span id="depth-value">2</span></span>
+                    </div>
+                    <input type="range" min="1" max="5" value="2" class="slider" id="depth-slider">
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-title">Node Size</div>
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Size: <span id="size-value">16</span></span>
+                    </div>
+                    <input type="range" min="8" max="32" value="16" class="slider" id="size-slider">
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-title">Layout</div>
+                <div class="filter-item active" data-layout="force">Force-Directed</div>
+                <div class="filter-item" data-layout="hierarchical">Hierarchical</div>
+                <div class="filter-item" data-layout="radial">Radial</div>
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-title">Actions</div>
+                <button class="btn" id="reset-btn">Reset View</button>
+                <button class="btn" id="export-btn">Export Graph</button>
+                <button class="btn" id="refresh-btn">Refresh Data</button>
+            </div>
+        </div>
+
+        <!-- Main Graph Area -->
+        <div class="graph-container" id="graph-container">
+            <button class="toggle-btn toggle-left" id="toggle-left">☰</button>
+            <button class="toggle-btn toggle-right" id="toggle-right">☰</button>
+            
+            <!-- SVG will be generated by JavaScript -->
+            <div class="loading">Generating graph visualization...</div>
+            
+            <svg class="graph-canvas" id="graph-canvas" width="100%" height="100%"></svg>
+        </div>
+
+        <!-- Right Panel - Node Details -->
+        <div class="right-panel" id="right-panel">
+            <div class="node-details-header">
+                <div class="node-title">Welcome to NoterDome</div>
+                <div class="node-type">Page • 12 connections</div>
+            </div>
+            
+            <div class="node-info">
+                <div class="info-label">Created:</div>
+                <div class="info-value">Today, 10:30 AM</div>
+                
+                <div class="info-label">Modified:</div>
+                <div class="info-value">Today, 10:35 AM</div>
+                
+                <div class="info-label">Tags:</div>
+                <div class="info-value">welcome, introduction, getting-started</div>
+                
+                <div class="info-label">Word Count:</div>
+                <div class="info-value">1,247 words</div>
+            </div>
+
+            <div class="node-links">
+                <div class="panel-title">Connected Notes</div>
+                <div class="link-item">Getting Started Guide</div>
+                <div class="link-item">Features Overview</div>
+                <div class="link-item">Keyboard Shortcuts</div>
+                <div class="link-item">Template Gallery</div>
+                <div class="link-item">Advanced Features</div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button class="btn" style="width: 100%;">Open Note</button>
+                <button class="btn" style="width: 100%; background-color: #dc2626;">Delete Node</button>
+            </div>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="bottom-controls">
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="zoom-out">-</button>
+                <span class="zoom-display" id="zoom-display">100%</span>
+                <button class="zoom-btn" id="zoom-in">+</button>
+                <button class="zoom-btn" id="zoom-fit">Fit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample graph data
+        const graphData = {
+            nodes: [
+                { id: 1, name: 'Welcome to NoterDome', type: 'page', connections: 12, size: 20, x: 400, y: 300 },
+                { id: 2, name: 'Getting Started', type: 'page', connections: 8, size: 18, x: 200, y: 200 },
+                { id: 3, name: 'Features Overview', type: 'page', connections: 15, size: 22, x: 600, y: 200 },
+                { id: 4, name: 'Keyboard Shortcuts', type: 'note', connections: 5, size: 16, x: 150, y: 400 },
+                { id: 5, name: 'Template Gallery', type: 'database', connections: 9, size: 18, x: 450, y: 150 },
+                { id: 6, name: 'Advanced Features', type: 'page', connections: 11, size: 20, x: 650, y: 400 },
+                { id: 7, name: 'Collaboration Guide', type: 'note', connections: 7, size: 16, x: 300, y: 500 },
+                { id: 8, name: 'Sync Settings', type: 'note', connections: 6, size: 16, x: 500, y: 450 },
+                { id: 9, name: 'Privacy Settings', type: 'note', connections: 4, size: 16, x: 700, y: 300 },
+                { id: 10, name: 'Mobile App', type: 'page', connections: 9, size: 18, x: 250, y: 100 }
+            ],
+            links: [
+                { source: 1, target: 2 },
+                { source: 1, target: 3 },
+                { source: 1, target: 4 },
+                { source: 1, target: 5 },
+                { source: 2, target: 4 },
+                { source: 2, target: 10 },
+                { source: 3, target: 5 },
+                { source: 3, target: 6 },
+                { source: 4, target: 7 },
+                { source: 5, target: 6 },
+                { source: 5, target: 8 },
+                { source: 6, target: 9 },
+                { source: 7, target: 8 },
+                { source: 8, target: 9 }
+            ]
+        };
+
+        // DOM Elements
+        const canvas = document.getElementById('graph-canvas');
+        const loading = document.querySelector('.loading');
+        const depthSlider = document.getElementById('depth-slider');
+        const sizeSlider = document.getElementById('size-slider');
+        const depthValue = document.getElementById('depth-value');
+        const sizeValue = document.getElementById('size-value');
+        const zoomDisplay = document.getElementById('zoom-display');
+        const zoomInBtn = document.getElementById('zoom-in');
+        const zoomOutBtn = document.getElementById('zoom-out');
+        const zoomFitBtn = document.getElementById('zoom-fit');
+        const resetBtn = document.getElementById('reset-btn');
+        const toggleLeft = document.getElementById('toggle-left');
+        const toggleRight = document.getElementById('toggle-right');
+        const leftPanel = document.querySelector('.left-panel');
+        const rightPanel = document.getElementById('right-panel');
+
+        // Current state
+        let currentZoom = 1;
+        let selectedNode = null;
+        let isDragging = false;
+        let dragStart = { x: 0, y: 0 };
+        let viewTranslate = { x: 0, y: 0 };
+
+        // Initialize the graph
+        function initGraph() {
+            setTimeout(() => {
+                loading.style.display = 'none';
+                drawGraph();
+                setupEventListeners();
+            }, 1000);
+        }
+
+        // Draw the graph
+        function drawGraph() {
+            // Clear canvas
+            canvas.innerHTML = '';
+
+            // Add zoom transformation
+            const transformGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            transformGroup.setAttribute('transform', `translate(${viewTranslate.x}, ${viewTranslate.y}) scale(${currentZoom})`);
+            canvas.appendChild(transformGroup);
+
+            // Draw links first (so they appear behind nodes)
+            graphData.links.forEach(link => {
+                const sourceNode = graphData.nodes.find(n => n.id === link.source);
+                const targetNode = graphData.nodes.find(n => n.id === link.target);
+                
+                if (sourceNode && targetNode) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', sourceNode.x);
+                    line.setAttribute('y1', sourceNode.y);
+                    line.setAttribute('x2', targetNode.x);
+                    line.setAttribute('y2', targetNode.y);
+                    line.setAttribute('class', 'link');
+                    transformGroup.appendChild(line);
+                }
+            });
+
+            // Draw nodes
+            graphData.nodes.forEach(node => {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', node.x);
+                circle.setAttribute('cy', node.y);
+                circle.setAttribute('r', (node.size || 16) * currentZoom);
+                circle.setAttribute('class', 'node');
+                circle.setAttribute('data-id', node.id);
+                
+                // Set color based on node type
+                if (node.type === 'database') circle.setAttribute('fill', '#10b981');
+                else if (node.type === 'note') circle.setAttribute('fill', '#f59e0b');
+                else circle.setAttribute('fill', '#4f46e5');
+                
+                circle.addEventListener('click', () => selectNode(node));
+                circle.addEventListener('dblclick', () => openNode(node));
+                
+                transformGroup.appendChild(circle);
+
+                // Add text label
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', node.x);
+                text.setAttribute('y', node.y + (node.size || 16) + 15);
+                text.setAttribute('class', 'text');
+                text.textContent = node.name.length > 15 ? node.name.substring(0, 15) + '...' : node.name;
+                transformGroup.appendChild(text);
+            });
+
+            // Update zoom display
+            zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        // Select a node
+        function selectNode(node) {
+            selectedNode = node;
+            
+            // Update the right panel with node details
+            document.querySelector('.node-title').textContent = node.name;
+            document.querySelector('.node-type').textContent = `${node.type.charAt(0).toUpperCase() + node.type.slice(1)} • ${node.connections} connections`;
+            
+            // Highlight selected node
+            document.querySelectorAll('.node').forEach(circle => {
+                circle.classList.remove('selected');
+            });
+            
+            const selectedCircle = document.querySelector(`.node[data-id="${node.id}"]`);
+            if (selectedCircle) {
+                selectedCircle.classList.add('selected');
+            }
+
+            // Update node details in right panel
+            const date = new Date().toLocaleString();
+            document.querySelectorAll('.info-value')[0].textContent = date;
+            document.querySelectorAll('.info-value')[1].textContent = date;
+            document.querySelectorAll('.info-value')[3].textContent = Math.floor(Math.random() * 2000) + 100 + ' words';
+        }
+
+        // Open node (simulate)
+        function openNode(node) {
+            alert(`Opening note: ${node.name}`);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Slider events
+            depthSlider.addEventListener('input', function() {
+                depthValue.textContent = this.value;
+            });
+
+            sizeSlider.addEventListener('input', function() {
+                sizeValue.textContent = this.value;
+                drawGraph();
+            });
+
+            // Zoom events
+            zoomInBtn.addEventListener('click', () => {
+                currentZoom = Math.min(currentZoom * 1.2, 3);
+                drawGraph();
+            });
+
+            zoomOutBtn.addEventListener('click', () => {
+                currentZoom = Math.max(currentZoom / 1.2, 0.3);
+                drawGraph();
+            });
+
+            zoomFitBtn.addEventListener('click', () => {
+                currentZoom = 1;
+                viewTranslate = { x: 0, y: 0 };
+                drawGraph();
+            });
+
+            // Reset view
+            resetBtn.addEventListener('click', () => {
+                currentZoom = 1;
+                viewTranslate = { x: 0, y: 0 };
+                selectedNode = null;
+                
+                // Remove selection
+                document.querySelectorAll('.node').forEach(circle => {
+                    circle.classList.remove('selected');
+                });
+                
+                drawGraph();
+            });
+
+            // Panel toggle buttons
+            toggleLeft.addEventListener('click', () => {
+                leftPanel.style.display = leftPanel.style.display === 'none' ? 'block' : 'none';
+            });
+
+            toggleRight.addEventListener('click', () => {
+                rightPanel.style.display = rightPanel.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Filter items
+            document.querySelectorAll('.filter-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Layout options
+            document.querySelectorAll('[data-layout]').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('[data-layout]').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        // Initialize the graph when the page loads
+        window.addEventListener('load', initGraph);
+
+        // Handle window resize
+        window.addEventListener('resize', drawGraph);
+    </script>
+</body>
+</html>

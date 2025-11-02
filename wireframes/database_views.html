@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoterDome - Database View Designs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #4f46e5;
+        }
+
+        .header p {
+            color: #888888;
+            font-size: 1.1em;
+        }
+
+        .view-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .view-tab {
+            padding: 12px 24px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .view-tab.active {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+
+        .view-container {
+            background-color: #1f1f1f;
+            border-radius: 12px;
+            border: 1px solid #333333;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .view-header {
+            padding: 20px;
+            border-bottom: 1px solid #333333;
+            background-color: #222222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-title {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .view-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .view-btn {
+            padding: 8px 16px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .view-btn:hover {
+            background-color: #3d3d3d;
+        }
+
+        .view-content {
+            padding: 20px;
+        }
+
+        /* Table View Styles */
+        .table-view {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-view th {
+            background-color: #2d2d2d;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid #444444;
+            font-weight: 600;
+            color: #d1d5db;
+            position: sticky;
+            top: 0;
+        }
+
+        .table-view td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #333333;
+            color: #e5e7eb;
+        }
+
+        .table-view tr:hover {
+            background-color: #2a2a2a;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+
+        .status-completed {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .status-in-progress {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .status-todo {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .priority-high {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .priority-medium {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .priority-low {
+            background-color: #10b981;
+            color: white;
+        }
+
+        /* Board View Styles */
+        .board-view {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .board-column {
+            min-width: 300px;
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            border: 1px solid #444444;
+        }
+
+        .board-column-header {
+            padding: 12px 16px;
+            background-color: #3d3d3d;
+            border-bottom: 1px solid #444444;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .board-column-title {
+            font-weight: 600;
+            color: #e5e7eb;
+        }
+
+        .board-column-count {
+            background-color: #4f46e5;
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 0.8em;
+        }
+
+        .board-column-content {
+            padding: 16px;
+            min-height: 400px;
+        }
+
+        .board-card {
+            background-color: #3d3d3d;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            cursor: move;
+            transition: transform 0.2s;
+        }
+
+        .board-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .board-card-title {
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #e5e7eb;
+        }
+
+        .board-card-description {
+            font-size: 0.9em;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+
+        .board-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8em;
+            color: #9ca3af;
+        }
+
+        /* Gallery View Styles */
+        .gallery-view {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-card {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            border: 1px solid #444444;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-card-image {
+            height: 160px;
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .gallery-card-content {
+            padding: 16px;
+        }
+
+        .gallery-card-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+        }
+
+        .gallery-card-description {
+            font-size: 0.9em;
+            color: #9ca3af;
+            margin-bottom: 12px;
+        }
+
+        .gallery-card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #9ca3af;
+        }
+
+        /* Calendar View Styles */
+        .calendar-view {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background-color: #3d3d3d;
+            border-bottom: 1px solid #444444;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 12px;
+            font-weight: 600;
+            color: #d1d5db;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: #444444;
+        }
+
+        .calendar-day-cell {
+            min-height: 120px;
+            background-color: #2d2d2d;
+            padding: 8px;
+            position: relative;
+        }
+
+        .calendar-day-number {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            font-size: 0.9em;
+            color: #9ca3af;
+        }
+
+        .calendar-day-content {
+            margin-top: 20px;
+        }
+
+        .calendar-event {
+            background-color: #4f46e5;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-bottom: 4px;
+            cursor: pointer;
+        }
+
+        .calendar-day-cell.today {
+            background-color: #3d3d3d;
+        }
+
+        .calendar-event.high-priority {
+            background-color: #ef4444;
+        }
+
+        .calendar-event.medium-priority {
+            background-color: #f59e0b;
+        }
+
+        .calendar-event.low-priority {
+            background-color: #10b981;
+        }
+
+        /* Toggle View Styles */
+        .view-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .view-selector-btn {
+            padding: 8px 16px;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .view-selector-btn.active {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+
+        .view-selector-btn:hover {
+            background-color: #3d3d3d;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .board-view {
+                flex-direction: column;
+            }
+            
+            .board-column {
+                min-width: 100%;
+            }
+            
+            .gallery-view {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NoterDome Database Views</h1>
+            <p>Interactive database view designs with table, board, gallery, and calendar layouts</p>
+        </div>
+
+        <div class="view-selector">
+            <button class="view-selector-btn active" data-view="table">Table View</button>
+            <button class="view-selector-btn" data-view="board">Board View</button>
+            <button class="view-selector-btn" data-view="gallery">Gallery View</button>
+            <button class="view-selector-btn" data-view="calendar">Calendar View</button>
+        </div>
+
+        <div class="view-container">
+            <div class="view-header">
+                <div class="view-title">Project Tasks Database</div>
+                <div class="view-controls">
+                    <button class="view-btn">+ Add Item</button>
+                    <button class="view-btn">Filter</button>
+                    <button class="view-btn">Sort</button>
+                </div>
+            </div>
+            <div class="view-content">
+                <!-- Table View -->
+                <div id="table-view" class="current-view">
+                    <table class="table-view">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Assignee</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Due Date</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Roadmap Overview</td>
+                                <td>John Doe</td>
+                                <td><span class="status-badge status-completed">Completed</span></td>
+                                <td><span class="status-badge priority-medium">Medium</span></td>
+                                <td>2024-01-15</td>
+                                <td>100%</td>
+                            </tr>
+                            <tr>
+                                <td>Feature Development</td>
+                                <td>Jane Smith</td>
+                                <td><span class="status-badge status-in-progress">In Progress</span></td>
+                                <td><span class="status-badge priority-high">High</span></td>
+                                <td>2024-02-01</td>
+                                <td>75%</td>
+                            </tr>
+                            <tr>
+                                <td>UI/UX Design</td>
+                                <td>Mike Johnson</td>
+                                <td><span class="status-badge status-todo">To Do</span></td>
+                                <td><span class="status-badge priority-low">Low</span></td>
+                                <td>2024-01-28</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>Testing Phase</td>
+                                <td>Sarah Wilson</td>
+                                <td><span class="status-badge status-todo">To Do</span></td>
+                                <td><span class="status-badge priority-high">High</span></td>
+                                <td>2024-02-15</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>Documentation</td>
+                                <td>Tom Brown</td>
+                                <td><span class="status-badge status-in-progress">In Progress</span></td>
+                                <td><span class="status-badge priority-medium">Medium</span></td>
+                                <td>2024-02-10</td>
+                                <td>45%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Board View -->
+                <div id="board-view" style="display: none;">
+                    <div class="board-view">
+                        <div class="board-column">
+                            <div class="board-column-header">
+                                <div class="board-column-title">To Do</div>
+                                <div class="board-column-count">2</div>
+                            </div>
+                            <div class="board-column-content">
+                                <div class="board-card">
+                                    <div class="board-card-title">UI/UX Design</div>
+                                    <div class="board-card-description">Create mockups and wireframes for the new dashboard</div>
+                                    <div class="board-card-footer">
+                                        <span>Mike Johnson</span>
+                                        <span class="status-badge priority-low">Low</span>
+                                    </div>
+                                </div>
+                                <div class="board-card">
+                                    <div class="board-card-title">Testing Phase</div>
+                                    <div class="board-card-description">Comprehensive testing of all features</div>
+                                    <div class="board-card-footer">
+                                        <span>Sarah Wilson</span>
+                                        <span class="status-badge priority-high">High</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="board-column">
+                            <div class="board-column-header">
+                                <div class="board-column-title">In Progress</div>
+                                <div class="board-column-count">2</div>
+                            </div>
+                            <div class="board-column-content">
+                                <div class="board-card">
+                                    <div class="board-card-title">Feature Development</div>
+                                    <div class="board-card-description">Implement core functionality for the editor</div>
+                                    <div class="board-card-footer">
+                                        <span>Jane Smith</span>
+                                        <span class="status-badge priority-high">High</span>
+                                    </div>
+                                </div>
+                                <div class="board-card">
+                                    <div class="board-card-title">Documentation</div>
+                                    <div class="board-card-description">Write user guides and API documentation</div>
+                                    <div class="board-card-footer">
+                                        <span>Tom Brown</span>
+                                        <span class="status-badge priority-medium">Medium</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="board-column">
+                            <div class="board-column-header">
+                                <div class="board-column-title">Completed</div>
+                                <div class="board-column-count">1</div>
+                            </div>
+                            <div class="board-column-content">
+                                <div class="board-card">
+                                    <div class="board-card-title">Roadmap Overview</div>
+                                    <div class="board-card-description">Create project roadmap and timeline</div>
+                                    <div class="board-card-footer">
+                                        <span>John Doe</span>
+                                        <span class="status-badge priority-medium">Medium</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery View -->
+                <div id="gallery-view" style="display: none;">
+                    <div class="gallery-view">
+                        <div class="gallery-card">
+                            <div class="gallery-card-image">Project</div>
+                            <div class="gallery-card-content">
+                                <div class="gallery-card-title">Roadmap Overview</div>
+                                <div class="gallery-card-description">Complete project roadmap with timeline and milestones</div>
+                                <div class="gallery-card-meta">
+                                    <span>John Doe</span>
+                                    <span>Completed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gallery-card">
+                            <div class="gallery-card-image">Feature</div>
+                            <div class="gallery-card-content">
+                                <div class="gallery-card-title">Feature Development</div>
+                                <div class="gallery-card-description">Core functionality implementation for the editor</div>
+                                <div class="gallery-card-meta">
+                                    <span>Jane Smith</span>
+                                    <span>In Progress</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gallery-card">
+                            <div class="gallery-card-image">Design</div>
+                            <div class="gallery-card-content">
+                                <div class="gallery-card-title">UI/UX Design</div>
+                                <div class="gallery-card-description">Mockups and wireframes for dashboard</div>
+                                <div class="gallery-card-meta">
+                                    <span>Mike Johnson</span>
+                                    <span>To Do</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gallery-card">
+                            <div class="gallery-card-image">Test</div>
+                            <div class="gallery-card-content">
+                                <div class="gallery-card-title">Testing Phase</div>
+                                <div class="gallery-card-description">Comprehensive testing of all features</div>
+                                <div class="gallery-card-meta">
+                                    <span>Sarah Wilson</span>
+                                    <span>To Do</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gallery-card">
+                            <div class="gallery-card-image">Docs</div>
+                            <div class="gallery-card-content">
+                                <div class="gallery-card-title">Documentation</div>
+                                <div class="gallery-card-description">User guides and API documentation</div>
+                                <div class="gallery-card-meta">
+                                    <span>Tom Brown</span>
+                                    <span>In Progress</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar View -->
+                <div id="calendar-view" style="display: none;">
+                    <div class="calendar-view">
+                        <div class="calendar-header">
+                            <div class="calendar-day">Sunday</div>
+                            <div class="calendar-day">Monday</div>
+                            <div class="calendar-day">Tuesday</div>
+                            <div class="calendar-day">Wednesday</div>
+                            <div class="calendar-day">Thursday</div>
+                            <div class="calendar-day">Friday</div>
+                            <div class="calendar-day">Saturday</div>
+                        </div>
+                        <div class="calendar-grid">
+                            <!-- Week 1 -->
+                            <div class="calendar-day-cell"><div class="calendar-day-number">28</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">29</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">30</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">31</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">1</div><div class="calendar-day-content"><div class="calendar-event">UI/UX Design</div></div></div>
+                            <div class="calendar-day-cell today"><div class="calendar-day-number">2</div><div class="calendar-day-content"><div class="calendar-event high-priority">Feature Dev</div></div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">3</div></div>
+                            
+                            <!-- Week 2 -->
+                            <div class="calendar-day-cell"><div class="calendar-day-number">4</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">5</div><div class="calendar-day-content"><div class="calendar-event">Documentation</div></div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">6</div><div class="calendar-day-content"><div class="calendar-event">Testing</div></div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">7</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">8</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">9</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">10</div></div>
+                            
+                            <!-- Week 3 -->
+                            <div class="calendar-day-cell"><div class="calendar-day-number">11</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">12</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">13</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">14</div><div class="calendar-day-content"><div class="calendar-event medium-priority">Roadmap</div></div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">15</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">16</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">17</div></div>
+                            
+                            <!-- Week 4 -->
+                            <div class="calendar-day-cell"><div class="calendar-day-number">18</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">19</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">20</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">21</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">22</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">23</div></div>
+                            <div class="calendar-day-cell"><div class="calendar-day-number">24</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // View switching functionality
+        document.querySelectorAll('.view-selector-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const view = this.getAttribute('data-view');
+                
+                // Update active button
+                document.querySelectorAll('.view-selector-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Show selected view
+                document.querySelectorAll('.view-content > div').forEach(viewDiv => {
+                    viewDiv.style.display = 'none';
+                });
+                document.getElementById(`${view}-view`).style.display = 'block';
+            });
+        });
+
+        // Make board cards draggable (simulated)
+        document.querySelectorAll('.board-card').forEach(card => {
+            card.addEventListener('dragstart', function(e) {
+                this.style.opacity = '0.5';
+            });
+            
+            card.addEventListener('dragend', function(e) {
+                this.style.opacity = '1';
+            });
+        });
+
+        // Make board columns drop targets
+        document.querySelectorAll('.board-column-content').forEach(column => {
+            column.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = '#3a3a3a';
+            });
+            
+            column.addEventListener('dragleave', function(e) {
+                this.style.backgroundColor = '';
+            });
+            
+            column.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = '';
+            });
+        });
+    </script>
+</body>
+</html>
