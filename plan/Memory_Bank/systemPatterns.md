@@ -19,6 +19,20 @@ NoterDome follows a client-server architecture with the following key components
    - IndexedDB for local client storage
    - S3-compatible storage for files
 
+## Documentation and Project Structure Patterns
+
+### Memory Bank System
+- Maintains project context across sessions
+- Contains core files: projectbrief.md, productContext.md, activeContext.md, etc.
+- Hierarchical structure with core files forming the foundation for others
+- Essential for maintaining project continuity and knowledge transfer
+
+### Project Documentation Structure
+- Centralized planning in the `plan/` directory
+- Separation of concerns with distinct folders for different aspects (Core_Documents, Design_System, etc.)
+- HTML prototypes and screens in separate directories
+- Comprehensive project context file (QWEN.md) for AI interaction context
+
 ## Key Technical Patterns
 
 ### State Management
@@ -94,3 +108,10 @@ NoterDome follows a client-server architecture with the following key components
 - Input sanitization at multiple levels
 - Rate limiting for API endpoints
 - End-to-end encryption for sensitive data (optional)
+
+## Project Management Patterns
+- Structured documentation using Memory Bank system
+- Hierarchical project organization with clear directory separation
+- Task breakdown by department and function
+- Regular updates to project context and status files
+- Identification and resolution of structural discrepancies

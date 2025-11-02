@@ -48,6 +48,13 @@ Environment variables are managed through:
 - Environment variables in deployment
 - Configuration validation at startup
 
+### Project Structure and Documentation
+- Organized in directories: plan/, screens/, wireframes/, QWEN.md
+- Planning and documentation in the plan/ directory
+- HTML prototypes in screens/ and wireframes/ directories
+- Comprehensive project context in QWEN.md for AI collaboration
+- Memory Bank system in plan/Memory_Bank/ for maintaining project continuity
+
 ### API Documentation
 - OpenAPI/Swagger for API endpoint documentation
 - Postman collections for testing
@@ -100,6 +107,12 @@ Environment variables are managed through:
 - Semantic versioning for releases
 - Lock files for reproducible builds
 - Vulnerability scanning for dependencies
+
+### Documentation and Knowledge Management
+- Memory Bank system for maintaining project context
+- QWEN.md for comprehensive project documentation
+- Regular updates to project structure documentation
+- Resolution of structural discrepancies between docs and implementation
 
 ### Monitoring and Observability
 - Structured logging with severity levels
