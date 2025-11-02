@@ -1,0 +1,56 @@
+Component: AppShell
+Prompt: "Create a modern note-taking app layout with a collapsible sidebar on the left showing nested folder structure with icons, a main content area with a clean editor, and a right sidebar for properties/backlinks. Include a top navigation bar with search, theme toggle, and user menu. Use a minimalist design with soft shadows and rounded corners. Colors: neutral background with accent colors for interactive elements."
+```
+
+### **Editör Bileşeni**
+```
+Component: RichTextEditor
+Prompt: "Design a distraction-free rich text editor with a floating toolbar that appears on text selection. Include markdown shortcuts, slash commands menu (type / to open), and inline code highlighting. Style should be clean with generous line-height and readable typography. Support for headings, lists, checkboxes, code blocks, and callouts/info boxes."
+```
+
+### **Sidebar & Navigation**
+```
+Component: NavigationSidebar
+Prompt: "Create a sidebar navigation with drag-and-drop folder tree, each item showing icon, title, and hover actions (add, delete, more). Include a search bar at top, quick access buttons for 'New Note', 'Daily Note', and 'Templates'. Show visual indicators for notes with backlinks. Collapsible sections with smooth animations."
+```
+
+### **Graph View**
+```
+Component: GraphVisualization
+Prompt: "Design an interactive graph visualization showing notes as nodes connected by links. Nodes should be sized by importance/connections, with different colors for note types. Include zoom controls, search/filter panel, and ability to click nodes to open notes. Use force-directed layout with smooth animations. Dark mode friendly."
+```
+
+### **Database/Table View**
+```
+Component: DatabaseView
+Prompt: "Create a Notion-style database view with multiple viewing options: table, board (Kanban), gallery, and calendar. Include inline editing, drag-and-drop reordering, customizable columns with different property types (text, number, date, select, multi-select). Add filtering, sorting, and grouping controls in a toolbar above the view."
+```
+
+### **Properties Panel**
+```
+Component: PropertiesPanel
+Prompt: "Design a right sidebar panel showing note metadata and properties. Include sections for: custom properties (key-value pairs), backlinks with preview, outgoing links, tags with color coding, created/modified dates, word count. Each section should be collapsible. Style: clean cards with subtle borders."
+```
+
+### **Command Palette**
+```
+Component: CommandPalette
+Prompt: "Create a command palette that opens with Cmd+K, showing searchable list of all actions. Include recent notes, quick actions, templates, and keyboard shortcuts. Results should update as user types, with keyboard navigation support. Style: centered modal with blur backdrop, modern glassmorphism effect."
+```
+
+### **Template Gallery**
+```
+Component: TemplateGallery
+Prompt: "Design a template selection modal with grid layout showing template previews. Categories on left sidebar (personal, work, planning, etc.). Each template card shows preview image, title, description, and 'Use Template' button. Include search and filter options. Modern, colorful design with hover effects."
+```
+
+### **Collaboration Panel**
+```
+Component: CollaborationPanel
+Prompt: "Create a collaboration interface showing active users with avatars, real-time cursors with name labels, comment threads in margin, and version history timeline. Include share button with permission settings (view/edit/comment). Style: subtle, non-intrusive, with smooth presence indicators."
+```
+
+### **Settings & Preferences**
+```
+Component: SettingsModal
+Prompt: "Design a comprehensive settings panel with tabbed navigation (general, appearance, shortcuts, plugins, account). Each section has clean form layouts with toggles, dropdowns, and input fields. Include search within settings. Preview changes in real-time where applicable. Modern, organized layout."

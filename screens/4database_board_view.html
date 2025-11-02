@@ -1,0 +1,220 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-[#111318] dark group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#282e39] px-10 py-3">
+          <div class="flex items-center gap-4 text-white">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">NoteMaster</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <label class="flex flex-col min-w-40 !h-10 max-w-64">
+              <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div
+                  class="text-[#9da6b9] flex border-none bg-[#282e39] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                  data-icon="MagnifyingGlass"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  placeholder="Search"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#282e39] focus:border-none h-full placeholder:text-[#9da6b9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                  value=""
+                />
+              </div>
+            </label>
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#282e39] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+            >
+              <div class="text-white" data-icon="ListBullets" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvslRYGsyWniW2bQzZvLGJ2aFwbkHTbuPWpfIs6ktEygm0-uC2pD6t7qUkHHfnnzmYsOaDcwPmxYqoPqCtD64Yr4wrfzkvNr7EwXuKNha5d2bXmaDi0kYVK_VJRCzzA92EjbLDsj03H9cMYgLzL-gqLUep8MSKPMf5dbs0fr_BpelwZq54I3Z2y-tk6qoMzJNt04fm-PLXg8s0XVMnoKKj7RB2I8w5Ag5XkmdIo2JmXxfaoBVE20JSbjBBSlWdAZzIGg7Y0dEDTCw");'
+            ></div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <div class="flex min-w-72 flex-col gap-3">
+                <p class="text-white tracking-light text-[32px] font-bold leading-tight">Project Tasks</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal">Organize and track your project tasks effectively.</p>
+              </div>
+            </div>
+            <div class="flex justify-between gap-2 px-4 py-3">
+              <div class="flex gap-2">
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="Funnel" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M230.6,49.53A15.81,15.81,0,0,0,216,40H40A16,16,0,0,0,28.19,66.76l.08.09L96,139.17V216a16,16,0,0,0,24.87,13.32l32-21.34A16,16,0,0,0,160,194.66V139.17l67.74-72.32.08-.09A15.8,15.8,0,0,0,230.6,49.53ZM40,56h0Zm108.34,72.28A15.92,15.92,0,0,0,144,139.17v55.49L112,216V139.17a15.92,15.92,0,0,0-4.32-10.94L40,56H216Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="SortAscending" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M128,128a8,8,0,0,1-8,8H48a8,8,0,0,1,0-16h72A8,8,0,0,1,128,128ZM48,72H184a8,8,0,0,0,0-16H48a8,8,0,0,0,0,16Zm56,112H48a8,8,0,0,0,0,16h56a8,8,0,0,0,0-16Zm125.66-21.66a8,8,0,0,0-11.32,0L192,188.69V112a8,8,0,0,0-16,0v76.69l-26.34-26.35a8,8,0,0,0-11.32,11.32l40,40a8,8,0,0,0,11.32,0l40-40A8,8,0,0,0,229.66,162.34Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="Rows" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M208,136H48a16,16,0,0,0-16,16v40a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V152A16,16,0,0,0,208,136Zm0,56H48V152H208v40Zm0-144H48A16,16,0,0,0,32,64v40a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V64A16,16,0,0,0,208,48Zm0,56H48V64H208v40Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="ListBullets" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="Gear" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+              </div>
+              <button
+                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#135bec] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-4"
+              >
+                <div class="text-white" data-icon="ListBullets" data-size="20px" data-weight="fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M56,128a16,16,0,1,1-16-16A16,16,0,0,1,56,128ZM40,48A16,16,0,1,0,56,64,16,16,0,0,0,40,48Zm0,128a16,16,0,1,0,16,16A16,16,0,0,0,40,176Zm176-64H88a8,8,0,0,0-8,8v16a8,8,0,0,0,8,8H216a8,8,0,0,0,8-8V120A8,8,0,0,0,216,112Zm0-64H88a8,8,0,0,0-8,8V72a8,8,0,0,0,8,8H216a8,8,0,0,0,8-8V56A8,8,0,0,0,216,48Zm0,128H88a8,8,0,0,0-8,8v16a8,8,0,0,0,8,8H216a8,8,0,0,0,8-8V184A8,8,0,0,0,216,176Z"
+                    ></path>
+                  </svg>
+                </div>
+                <span class="truncate">Properties</span>
+              </button>
+            </div>
+            <div class="flex gap-3 p-3 flex-wrap pr-4">
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#282e39] pl-4 pr-4">
+                <p class="text-white text-sm font-medium leading-normal">Status: In Progress</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#282e39] pl-4 pr-4">
+                <p class="text-white text-sm font-medium leading-normal">Assignee: Team A</p>
+              </div>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Kanban Board</h2>
+            <div class="px-4 py-3 @container">
+              <div class="flex overflow-hidden rounded-lg border border-[#3b4354] bg-[#111318]">
+                <table class="flex-1">
+                  <thead>
+                    <tr class="bg-[#1c1f27]">
+                      <th class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-120 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">To Do (2)</th>
+                      <th class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-240 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                        In Progress (3)
+                      </th>
+                      <th class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-360 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">Done (1)</th>
+                      <th class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-480 px-4 py-3 text-left text-white w-60 text-[#9da6b9] text-sm font-medium leading-normal">
+                        Add new column
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-t border-t-[#3b4354]">
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        &lt;icon&gt;Document&lt;/icon&gt; Task 1 &lt;tag&gt;High Priority&lt;/tag&gt; &lt;avatar&gt;female, age 30, profile photo&lt;/avatar&gt;
+                      </td>
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        &lt;icon&gt;Document&lt;/icon&gt; Task 3 &lt;tag&gt;Medium Priority&lt;/tag&gt; &lt;avatar&gt;male, age 25, profile photo&lt;/avatar&gt;
+                      </td>
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-360 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        &lt;icon&gt;Document&lt;/icon&gt; Task 5 &lt;tag&gt;Low Priority&lt;/tag&gt; &lt;avatar&gt;male, age 35, profile photo&lt;/avatar&gt;
+                      </td>
+                      <td
+                        class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-480 h-[72px] px-4 py-2 w-60 text-[#9da6b9] text-sm font-bold leading-normal tracking-[0.015em]"
+                      ></td>
+                    </tr>
+                    <tr class="border-t border-t-[#3b4354]">
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        &lt;icon&gt;Document&lt;/icon&gt; Task 2 &lt;tag&gt;Medium Priority&lt;/tag&gt; &lt;avatar&gt;male, age 28, profile photo&lt;/avatar&gt;
+                      </td>
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        &lt;icon&gt;Document&lt;/icon&gt; Task 4 &lt;tag&gt;High Priority&lt;/tag&gt; &lt;avatar&gt;female, age 22, profile photo&lt;/avatar&gt;
+                      </td>
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-360 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal"></td>
+                      <td
+                        class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-480 h-[72px] px-4 py-2 w-60 text-[#9da6b9] text-sm font-bold leading-normal tracking-[0.015em]"
+                      ></td>
+                    </tr>
+                    <tr class="border-t border-t-[#3b4354]">
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal"></td>
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        &lt;icon&gt;Document&lt;/icon&gt; Task 6 &lt;tag&gt;Low Priority&lt;/tag&gt; &lt;avatar&gt;male, age 32, profile photo&lt;/avatar&gt;
+                      </td>
+                      <td class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-360 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal"></td>
+                      <td
+                        class="table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-480 h-[72px] px-4 py-2 w-60 text-[#9da6b9] text-sm font-bold leading-normal tracking-[0.015em]"
+                      ></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <style>
+                          @container(max-width:120px){.table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-120{display: none;}}
+                @container(max-width:240px){.table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-240{display: none;}}
+                @container(max-width:360px){.table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-360{display: none;}}
+                @container(max-width:480px){.table-9742f4c1-b3de-412b-9b19-254e2d4ca436-column-480{display: none;}}
+              </style>
+            </div>
+            <p class="text-white text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
+              Drag and drop cards to move tasks between columns. Reorder columns by dragging their headers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

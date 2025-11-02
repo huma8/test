@@ -1,0 +1,42 @@
+Özellik Kategorileri:
+🔴 OLMAZSA OLMAZ (Tier 1)
+
+Zengin Metin Editörü - Başlık, paragraf, liste, kod blokları
+Dosya Organizasyonu - Klasörler, etiketler, arama
+Çoklu Platform Desteği - Web, desktop, mobile
+Gerçek Zamanlı Senkronizasyon - Cihazlar arası
+Markdown Desteği - Hem yazma hem okuma
+Temel Medya Desteği - Resim, link gömme
+Gece/Gündüz Modu - Dark/Light theme
+
+🟡 ORTA SEVİYE (Tier 2)
+
+Notlar Arası Bağlantılar - Backlinks, wiki-style linking
+Veritabanı/Tablolar - Yapılandırılmış veri tutma
+Şablonlar - Hızlı sayfa oluşturma
+İşbirliği Özellikleri - Paylaşım, yorum, gerçek zamanlı düzenleme
+Web Clipper - Web içeriği kaydetme
+Offline Mod - İnternetsiz çalışma
+Export/Import - Veri taşınabilirliği
+Arama ve Filtreleme - Gelişmiş arama
+
+🟢 İLERİ SEVİYE (Tier 3)
+
+Graph View - Bağlantı görselleştirme
+AI Entegrasyonu - Otomatik özetleme, yazma asistanı
+API ve Eklentiler - Genişletilebilirlik
+Canvas/Whiteboard - Görsel brainstorming
+Veritabanı İlişkileri - İlişkisel veri modeli
+Versiyon Geçmişi - Değişiklikleri takip
+End-to-End Encryption - Güvenlik
+Custom Domains - Kendi domain ile yayınlama
+
+🔵 ÖZGÜN ÖZELLİKLER (Differentiators)
+
+Bidirectional Linking - Çift yönlü bağlantılar
+Object-Based Notes - Capacities tarzı obje sistemi
+Daily Notes - Günlük not otomasyonu
+Query Language - Dinamik içerik sorguları
+Embeddable Databases - Sayfalar içinde veritabanları
+Spaced Repetition - Öğrenme kartları
+Public Pages - SEO-friendly web sitesi olarak yayınlama

@@ -1,0 +1,279 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-[#111318] dark group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#282e39] px-10 py-3">
+          <div class="flex items-center gap-8">
+            <div class="flex items-center gap-4 text-white">
+              <div class="size-4">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+              <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">NoteMaster</h2>
+            </div>
+            <div class="flex items-center gap-9">
+              <a class="text-white text-sm font-medium leading-normal" href="#">Home</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Notes</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Templates</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Tasks</a>
+            </div>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <label class="flex flex-col min-w-40 !h-10 max-w-64">
+              <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div
+                  class="text-[#9da6b9] flex border-none bg-[#282e39] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                  data-icon="MagnifyingGlass"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  placeholder="Search"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#282e39] focus:border-none h-full placeholder:text-[#9da6b9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                  value=""
+                />
+              </div>
+            </label>
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#282e39] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+            >
+              <div class="text-white" data-icon="Question" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBuCxxdysLAUQEz5x-MGt03BknPu466SAZek2gQ-yx67TwIAC2Q-VJ_p880KIaTxGHu8PZBSARMk70omQBLPrJXwzr-ngoLkNjaMfA5xDoMzkrscBN9r2cH4jgOycKDBUMq3blQ9vAOYV92-r6ytowUERSO2dAz59TqMiTX0VoTJ8WzOWDYSJA4o9eCtUq9SaFE4ijM2g9k0Wo2bwlR6-yfuyUgwev3ZYjnSKrU_7wZRS_mXFXK3IacQ9YnQ_DAtUc6oS5aGzVf4Kw");'
+            ></div>
+          </div>
+        </header>
+        <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col w-80">
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Categories</h3>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div class="text-white flex items-center justify-center rounded-lg bg-[#282e39] shrink-0 size-12" data-icon="User" data-size="24px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Personal</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">12</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div class="text-white flex items-center justify-center rounded-lg bg-[#282e39] shrink-0 size-12" data-icon="Briefcase" data-size="24px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Work</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">8</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div class="text-white flex items-center justify-center rounded-lg bg-[#282e39] shrink-0 size-12" data-icon="GraduationCap" data-size="24px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M251.76,88.94l-120-64a8,8,0,0,0-7.52,0l-120,64a8,8,0,0,0,0,14.12L32,117.87v48.42a15.91,15.91,0,0,0,4.06,10.65C49.16,191.53,78.51,216,128,216a130,130,0,0,0,48-8.76V240a8,8,0,0,0,16,0V199.51a115.63,115.63,0,0,0,27.94-22.57A15.91,15.91,0,0,0,224,166.29V117.87l27.76-14.81a8,8,0,0,0,0-14.12ZM128,200c-43.27,0-68.72-21.14-80-33.71V126.4l76.24,40.66a8,8,0,0,0,7.52,0L176,143.47v46.34C163.4,195.69,147.52,200,128,200Zm80-33.75a97.83,97.83,0,0,1-16,14.25V134.93l16-8.53ZM188,118.94l-.22-.13-56-29.87a8,8,0,0,0-7.52,14.12L171,128l-43,22.93L25,96,128,41.07,231,96Z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Education</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">15</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div class="text-white flex items-center justify-center rounded-lg bg-[#282e39] shrink-0 size-12" data-icon="Palette" data-size="24px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Creative</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">5</p>
+              </div>
+            </div>
+          </div>
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="px-4 py-3">
+              <label class="flex flex-col min-w-40 h-12 w-full">
+                <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                  <div
+                    class="text-[#9da6b9] flex border-none bg-[#282e39] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                    data-icon="MagnifyingGlass"
+                    data-size="24px"
+                    data-weight="regular"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <input
+                    placeholder="Search templates"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#282e39] focus:border-none h-full placeholder:text-[#9da6b9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                    value=""
+                  />
+                </div>
+              </label>
+            </div>
+            <div class="flex gap-3 p-3 flex-wrap pr-4">
+              <button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#282e39] pl-4 pr-2">
+                <p class="text-white text-sm font-medium leading-normal">Category</p>
+                <div class="text-white" data-icon="CaretDown" data-size="20px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                  </svg>
+                </div>
+              </button>
+              <button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#282e39] pl-4 pr-2">
+                <p class="text-white text-sm font-medium leading-normal">Popularity</p>
+                <div class="text-white" data-icon="CaretDown" data-size="20px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                  </svg>
+                </div>
+              </button>
+              <button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#282e39] pl-4 pr-2">
+                <p class="text-white text-sm font-medium leading-normal">Recent</p>
+                <div class="text-white" data-icon="CaretDown" data-size="20px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                  </svg>
+                </div>
+              </button>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Featured</h2>
+            <div class="p-4 @container">
+              <div class="flex flex-col items-stretch justify-start rounded-lg @xl:flex-row @xl:items-start">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvw9rRBcL9YmEk_MxEGVrHVQZhXSEcZNBt7mIuvat9tU1StKWmcKtQgvtFwZ1yXi5RushkuSZC8rYf_EzeFcS4sqne1Qcz9a1lHE7byqMx-ebT1t6RDAmKBGWP_ujbLm9IR0rVcyToIYFdHKDzgyTXn0NeGS_kM89mfeXrJzNsrC2CCTWv_1K74tY7JdsjiXDgWNIGrtX2d5V71NGVF3HMJTWOLAAd-TpS7-3FgoxrXjvqvYqPlJaHIpZn5cDYoR7QZ2n14ZIHVyw");'
+                ></div>
+                <div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
+                  <p class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Project Management Template</p>
+                  <div class="flex items-end gap-3 justify-between">
+                    <div class="flex flex-col gap-1">
+                      <p class="text-[#9da6b9] text-base font-normal leading-normal">Streamline your project workflow with this comprehensive template.</p>
+                      <p class="text-[#9da6b9] text-base font-normal leading-normal">By Sarah Miller</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">All Templates</h2>
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZ9Tc2jjIiSSDT6U-0N4NYiTCtcGPUkZ2ZYLR0wvK-3mzeChIJ9k0OA59SZYaEGCZCU65Saznu4N9zovMNVYawVMNTrmK50FdzO91vEFHozd9YKk7_QjjtnTERunoNiEM7iYSme81g1WhVOOfjiPGOhHGTu69sw8s2uYHSer_vMoMpG4qwct4fFhH_Yt2wB87sIcjmfMRu85oo5sK1nwxCBxMOBEdKF7yP3Kodwj7_lRKm8rmwlwCWEp5XMDdtskE1URipTgzLWUw");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Meeting Notes</p>
+                  <p class="text-[#9da6b9] text-sm font-normal leading-normal">Capture key takeaways and action items from your meetings.</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC50j7m228PGPMXuHpXu4VQ00yX7IBMvq9o-r1uaXYhWVSqVmbHCyaHZp_nn6vztPHmgfT_ydvUtW2XE9v7yY3tgFsyQiaZYI0ztV1gZMoe7yCvUR8bN_0qYalRNqYyX7S-fRgIVr_CtHXv0k2yZVLLd89rZCJ-iu0mB_f1YPLmxN7L3HbZSPCsO9RygecVAiRhLCq1J2yfguJwHkZA9SABbAnowmqGsfvzfYrhdmnmjVDcSxxw4R_UofDWOpArsP0nqUs5H30iUWo");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Daily Planner</p>
+                  <p class="text-[#9da6b9] text-sm font-normal leading-normal">Organize your day with this simple and effective planner.</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjVXq-dWz5WD11nnFBieImnc8-qLdGx6HNnWFEwhkRoBbLtlrlcxWTk15vvQVBGU4av17jqP65MHqj64HPfppc2EfsScv12KJzex6tr182ECwdvx2VzHoONP9cp-ICMKMAenlcGn-6P5eqAib3wPqF5r0FPHvZatL0yv3ZQzMRZJiv2HqSbVg5WzDkXfKCGjuW3l1hvxIowo-p3tQ8LQCSWO2njx_DYjsEHEbGkkroi-01ICEhaXQ8C0sRhpGtFxkcY-ncD-qaBFw");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Travel Itinerary</p>
+                  <p class="text-[#9da6b9] text-sm font-normal leading-normal">Plan your next adventure with this detailed itinerary template.</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4mDXTL2f_G_UUVl8a_YQA20hgYArErpyKzUrwylW0VhVJCng0ZmXK7h3LZgbhaD-jsyBJNUiZUdC9ZLQzb2bW06hsH0MJC8UnxnMqfdP77bFMlEwQCD1Rr8qTUQaScfU72YOyinGzboWbp0B1yiPLYwUd8K09BrB81C0Z_447vptJDywb2s8NjII9oDD3Oy0j72wOhjzQxxRk5evHgkRZgKnyJGla0f26N2W75ewp3YmA88BE4ieNVI6xCta7vvxOddLjUdu1jug");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Recipe Collection</p>
+                  <p class="text-[#9da6b9] text-sm font-normal leading-normal">Keep all your favorite recipes in one place with this easy-to-use template.</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAMq7pjh19EqP7fu3MOB_drm7n-RTT7p1iidc9l-r7HKKVKGP3JdDv-bLpxblrQTlQnDn_UnA9i8MJru5myi3b2V0UCGirwNCIm11tMcfOMYbl8OzR5MdW3gripHuv-J4Iu6RRDSMbILibD54p4lXRHQE6RWPbfkbE3psKP0_ljS5sdnBfEtW8xnA2YclWAkMVxZor6sK1fVcCT-Ytp01ZGU1rmFgzrXMSGjljoy-cznZcfJyMH7boyNa38oWAluFxoSFv-fvlKx24");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Fitness Tracker</p>
+                  <p class="text-[#9da6b9] text-sm font-normal leading-normal">Track your workouts and progress with this fitness-focused template.</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJUje-kxu3_MkggjJBZpL0BBgpbNWt2BrDJ4budZK1uA9Z3RpNCDBtgnCiGTChR2FEhZolCFkeAdtPTB3uOQ3De18_SGAGGlpHe2puBlJ-kk-4JcRTOkOnLiuQKQV-njg0va7JN66dfDL1-RsIGm2665P0ibBu8FvrYe0NJQFp8K-TP1cwcbvA9gFZePl880OHtAGtokBQSxA_Qh60OJ7G2xb5WplCnuV9CQKtWRI4a4WKjwuKlmCCoXxoS9izj-lPS6bt7hp_ZzQ");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Book Review</p>
+                  <p class="text-[#9da6b9] text-sm font-normal leading-normal">Write and organize your thoughts on books you've read.</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex px-4 py-3 justify-center">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#282e39] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Load more</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

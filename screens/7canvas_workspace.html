@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-[#111318] dark group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#282e39] px-10 py-3">
+          <div class="flex items-center gap-4 text-white">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_6_330)">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_330"><rect width="48" height="48" fill="white"></rect></clipPath>
+                </defs>
+              </svg>
+            </div>
+            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">CanvasNote</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#282e39] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+            >
+              <div class="text-white" data-icon="User" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAyllItqEylF1IVHBrhAvVGK00OXzMvcGbct-MHqodD76ShJPygWAp75r6Y5Bd8rZxHfwFJGmcmSzEoldBZiBYOzxpJszTxBac1RjwSR0_ZleZR5atir4Wdbch9rR3g2wtubm-SYY4R6jyVDgkstr5s5SiOsbA4MHwzcwdCnsGRwmbhsbgRUiLFD1h4yDJ3SEaTeXnFtuMT_elIrx2KCUjX5rVdJO2BUhKnAU-55_03H-y3qSXx4Wa244CQRR42tOtKxqMOhhQ5-9I");'
+            ></div>
+          </div>
+        </header>
+        <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col w-80">
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Layers</h3>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuATClLGDzuGSe4xs5bKr8RhLd9O9M1-u8rFkz9GYRpY9t3DTFr0g_dqPcHJgwnc6kllpL6pNH_bmJ7emSfAW-ixZkhdQq4POHVa07jDkruUgpioETf0LUMt-zbjHcXeFhbOnMoPdEzv5DkCpqqRflbqAhpojJ6GHXI7aFy90udDmKMu1rhZOPIudTEBx2ndAe1xd9nZGSb-2wpY2cEYjBpmCS0zQaSCsAvXNlBYnRDicOdZMSJ59XKdBn-yZdacUUUJYmSyCW__jdY");'
+              ></div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Layer 1</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">Rectangle</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRPOwffStPueNTNZMAF9tZT_nuslSOF-vexkGhHN4b26yBXsDYdZSutNOXvrnV8EfxbYyXAgvkPA4wDcDY-v_uXCsllX1w_k9q4-dB5aEOoS-lX0adBrXuSUVDEOk4GrlwagmUg5cxSkV66bIHkFhe4XPAwqoQQoX-EJB6W_qRWx5yrWfvhOPl05HG1-YOajxzs_fNpUCq2i1WU9DTmPe9_Is_qVscGPbTDT6G27LSKCqXdtA5nzt8e3LcYtvfjSv-SGurRfFAiRo");'
+              ></div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Layer 2</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">Circle</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXkqsHR37LQU5FNPmKQOnp2325PFEpe01lvObntcZ_eNJ0vNhrkhsPF9nNpKtnnadZcq_ctjV_a79LJPPppEC1qvRdsGnbIB1rqWr9jFsn84xD8VWweGWinjMSb_nUwhn2NR59GfpFdM68SZTUgLniM955gRjwpntKFDpH4L8t3_Y3AoL_FyBuc84YbG2pF30_aFemMVKE8sZdhNah_DXzAnRzBLgVgKFAxm9c-X7S8kuKonKwACmFjik_wQCvCjasqu8pL3tG_Xs");'
+              ></div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Layer 3</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">Arrow</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDR3_6zQ1A4BDqrDr-9Ca-_IPoLmgbnVaRQcr-PdqlENkZ3q5nBm8UK2D2d8eaiVlmjr2ohOjP3-kaXXUTdwmF1rsfNZXS36ZYWmvgb_CbYtXMzwTdiqKrUBHefbRdZa5ZOtSP9TcVGJyNxw0A5xUIQ1Ecjsrrj0yXbRhI5pkMfgCFzAmDmVlWve0vAhFVbQp277zDfxMFsibBSqdEOC6Tht_NSX5UnBFjC_RBb3irI5l3rKAKPVa_JcovbNEITZS0DHUkx-exzsp0");'
+              ></div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Layer 4</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">Text</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0ADmMV5_pNhTxDciu94tLV5LJzCeB29CGg6kKXWd0a5pYLZtfJOdQCZW0f88tIPchguBQ-73x_8Eqba3IIHHC-OfCY_1Ehv5_-SC4qB-j48ruyUC9EZ4zxIqp6IcguxmtGjTlHcnZrqrbQgIaCGANrUbBkWvE-dT8mY8vBW7Y7LuMg5YY71zI7z9u6Wc3O54mEsxzM94KeIZB8ppnaGugM2HUzUKPyOOqO9beKX73K23qtF0CNsEqVKp116uJwn1M44rmg_5P7X0");'
+              ></div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Layer 5</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">Sticky Note</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-[#111318] px-4 min-h-[72px] py-2">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCcajxDQr6NyZrysvD__6hplISOYcg9EunH5K-0LjyT3bH-2dvmWLxtuXNayeS4NZUc5C_R0o7dbmYr7IhaEiRbDZLd-mPDF9LkJRfWEBCMS9Ta9c65Bu2__oBA9_ORkblWxoMIphcRH_dy7bnbIwcpUAe15sHDvTr1ON308gMNR4FjgFn3bBRvPSig0HtO673zrs6FRpdpyB8QTIOwQ_DUP1CTvos4LKdwW-oH3bSRY03RvFnY1DxBT7SjQa6ORaIcg0uh-TsD38U");'
+              ></div>
+              <div class="flex flex-col justify-center">
+                <p class="text-white text-base font-medium leading-normal line-clamp-1">Layer 6</p>
+                <p class="text-[#9da6b9] text-sm font-normal leading-normal line-clamp-2">Connector</p>
+              </div>
+            </div>
+          </div>
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex justify-between gap-2 px-4 py-3">
+              <div class="flex gap-2">
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="CursorClick" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M169.64,134.33l44.77-19.46A16,16,0,0,0,213,85.07L52.92,32.8A16,16,0,0,0,32.8,52.92L85.07,213a15.83,15.83,0,0,0,14.41,11l.79,0a15.83,15.83,0,0,0,14.6-9.59h0l19.46-44.77L184,219.31a16,16,0,0,0,22.63,0l12.68-12.68a16,16,0,0,0,0-22.63Zm-69.48,73.76.06-.05Zm95.15-.09-49.66-49.67a16,16,0,0,0-26,4.94l-19.42,44.65L48,48l159.87,52.21-44.64,19.41a16,16,0,0,0-4.94,26L208,195.31ZM88,24V16a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0ZM8,96a8,8,0,0,1,8-8h8a8,8,0,0,1,0,16H16A8,8,0,0,1,8,96ZM120.85,28.42l8-16a8,8,0,0,1,14.31,7.16l-8,16a8,8,0,1,1-14.31-7.16Zm-81.69,96a8,8,0,0,1-3.58,10.74l-16,8a8,8,0,0,1-7.16-14.31l16-8A8,8,0,0,1,39.16,124.42Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="Pen" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M227.32,73.37,182.63,28.69a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31l83.67-83.66,3.48,13.9-36.8,36.79a8,8,0,0,0,11.31,11.32l40-40a8,8,0,0,0,2.11-7.6l-6.9-27.61L227.32,96A16,16,0,0,0,227.32,73.37ZM48,179.31,76.69,208H48Zm48,25.38L51.31,160,136,75.31,180.69,120Zm96-96L147.32,64l24-24L216,84.69Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="Rectangle" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200Z"></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="Circle" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Z"></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="ArrowRight" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="Article" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM184,96a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,96Zm0,32a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,128Zm0,32a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,160Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="Note" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M88,96a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H96A8,8,0,0,1,88,96Zm8,40h64a8,8,0,0,0,0-16H96a8,8,0,0,0,0,16Zm32,16H96a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16ZM224,48V156.69A15.86,15.86,0,0,1,219.31,168L168,219.31A15.86,15.86,0,0,1,156.69,224H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32H208A16,16,0,0,1,224,48ZM48,208H152V160a8,8,0,0,1,8-8h48V48H48Zm120-40v28.7L196.69,168Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="HouseLine" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M240,208H224V115.55a16,16,0,0,0-5.17-11.78l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM48,115.55l.11-.1L128,40l79.9,75.43.11.1V208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48ZM144,208H112V160h32Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="ArrowCounterClockwise" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M224,128a96,96,0,0,1-94.71,96H128A95.38,95.38,0,0,1,62.1,197.8a8,8,0,0,1,11-11.63A80,80,0,1,0,71.43,71.39a3.07,3.07,0,0,1-.26.25L44.59,96H72a8,8,0,0,1,0,16H24a8,8,0,0,1-8-8V56a8,8,0,0,1,16,0V85.8L60.25,60A96,96,0,0,1,224,128Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <button class="p-2 text-white">
+                  <div class="text-white" data-icon="ArrowClockwise" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="flex px-4 py-3">
+              <div
+                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg object-cover"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB8DmL3WAcMnjJ7kdQFbbgE5fgAzwoqTC65NHVQSkU2RAuOEQeP8eC5q9vVI5p2KblPEJpt8mxgMd9YL1uEBGN-8FEdKCZSEBmXJ7qkr3oULz_m66tlPdrxsNF7ijxLLiQq1zG5sQ2XbRUuEpw4ADFsk61_RUyIqg66ufqBXHagIsIpi9Pjca-pljvoQIkS7-_QhffTPC0El_fV1JcFzyomYfhOX62Vh-Z1rQ4RiUw0Lfuh7GZVfIlkrZu--Rs-mWI05x_FyxdhORk");'
+              ></div>
+            </div>
+            <div class="flex justify-end overflow-hidden px-7 pb-5">
+              <button
+                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#135bec] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2"
+              >
+                <div class="text-white" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                    ></path>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
