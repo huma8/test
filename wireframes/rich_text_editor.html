@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoterDome - Rich Text Editor with Floating Toolbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .editor-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #1f1f1f;
+            border-radius: 12px;
+            border: 1px solid #333333;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .editor-header {
+            padding: 20px;
+            border-bottom: 1px solid #333333;
+            background-color: #222222;
+        }
+
+        .editor-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: transparent;
+            color: white;
+            border: 2px solid transparent;
+            width: 100%;
+        }
+
+        .editor-title:focus {
+            outline: none;
+            border-color: #4f46e5;
+            background-color: #2a2a2a;
+        }
+
+        .editor-content {
+            min-height: 400px;
+            padding: 30px;
+            line-height: 1.6;
+            font-size: 16px;
+            color: white;
+            outline: none;
+            position: relative;
+        }
+
+        .editor-content:focus {
+            outline: none;
+        }
+
+        .editor-content h1 {
+            font-size: 2em;
+            margin: 0.67em 0;
+            color: #e5e7eb;
+            border-bottom: 2px solid #374151;
+            padding-bottom: 0.3em;
+        }
+
+        .editor-content h2 {
+            font-size: 1.5em;
+            margin: 0.83em 0;
+            color: #d1d5db;
+        }
+
+        .editor-content h3 {
+            font-size: 1.17em;
+            margin: 1em 0;
+            color: #9ca3af;
+        }
+
+        .editor-content p {
+            margin: 1em 0;
+        }
+
+        .editor-content ul, .editor-content ol {
+            margin: 1em 0;
+            padding-left: 2em;
+        }
+
+        .editor-content li {
+            margin: 0.5em 0;
+        }
+
+        .editor-content blockquote {
+            margin: 1em 0;
+            padding: 12px 20px;
+            border-left: 4px solid #4f46e5;
+            background-color: #2d2d2d;
+            color: #d1d5db;
+            font-style: italic;
+        }
+
+        .editor-content code {
+            background-color: #2d2d2d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: #fbbf24;
+        }
+
+        .editor-content pre {
+            background-color: #2d2d2d;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1em 0;
+        }
+
+        .editor-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .editor-content img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin: 1em 0;
+        }
+
+        /* Floating Toolbar */
+        .floating-toolbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            backdrop-filter: blur(10px);
+            background-color: rgba(45, 45, 45, 0.95);
+        }
+
+        .floating-toolbar.show {
+            display: flex;
+        }
+
+        .toolbar-button {
+            background: none;
+            border: 1px solid transparent;
+            color: white;
+            padding: 8px 12px;
+            margin: 0 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .toolbar-button:hover {
+            background-color: #3d3d3d;
+            border-color: #555555;
+        }
+
+        .toolbar-button.active {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+
+        .toolbar-separator {
+            width: 1px;
+            background-color: #444444;
+            margin: 0 4px;
+        }
+
+        /* Slash Commands Menu */
+        .slash-commands {
+            position: absolute;
+            background-color: #2d2d2d;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            display: none;
+            min-width: 200px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .slash-command-item {
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slash-command-item:hover {
+            background-color: #3d3d3d;
+        }
+
+        .slash-command-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Selection highlighting */
+        ::selection {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+        /* Status bar */
+        .editor-status {
+            padding: 12px 20px;
+            border-top: 1px solid #333333;
+            background-color: #222222;
+            color: #888888;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Placeholder for empty content */
+        .editor-content:empty:not(:focus)::before {
+            content: 'Start writing here... Type "/" for commands or select text for formatting';
+            color: #666666;
+            pointer-events: none;
+        }
+
+        /* Code highlighting example */
+        .code-block {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: #d4d4d4;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: block;
+            margin: 4px 0;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .code-number {
+            color: #b5cea8;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        /* Inline code */
+        .inline-code {
+            background-color: #2d2d2d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: #fbbf24;
+        }
+
+        /* Table styling */
+        .editor-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+
+        .editor-content th,
+        .editor-content td {
+            border: 1px solid #444444;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .editor-content th {
+            background-color: #2d2d2d;
+            font-weight: 600;
+        }
+
+        /* Checkbox styling */
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin: 0.5em 0;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            accent-color: #4f46e5;
+        }
+
+        /* Callout blocks */
+        .callout {
+            margin: 1em 0;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid #4f46e5;
+            background-color: #2d2d2d;
+        }
+
+        .callout.info {
+            border-left-color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .callout.warning {
+            border-left-color: #f59e0b;
+            background-color: rgba(245, 158, 11, 0.1);
+        }
+
+        .callout.success {
+            border-left-color: #10b981;
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+
+        .callout.error {
+            border-left-color: #ef4444;
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Image placeholder */
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #2d2d2d, #3d3d3d);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            margin: 1em 0;
+            border: 2px dashed #444444;
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <div class="editor-header">
+            <input type="text" class="editor-title" value="Rich Text Editor Demo" placeholder="Untitled">
+        </div>
+        
+        <div class="editor-content" contenteditable="true">
+            <h1>Welcome to NoterDome Editor</h1>
+            <p>This is a rich text editor with <strong>markdown support</strong> and <em>WYSIWYG preview</em>.</p>
+            
+            <h2>Features</h2>
+            <ul>
+                <li class="checkbox-item"><input type="checkbox"> Markdown-first editing</li>
+                <li class="checkbox-item"><input type="checkbox" checked> Real-time formatting</li>
+                <li class="checkbox-item"><input type="checkbox"> Slash commands menu</li>
+                <li class="checkbox-item"><input type="checkbox"> Code blocks with syntax highlighting</li>
+            </ul>
+
+            <h3>Code Example</h3>
+            <pre class="code-block"><code>function helloWorld() {
+    console.log('Hello, NoterDome!');
+    
+    // This is a comment
+    const greeting = 'Welcome to your second brain';
+    return greeting;
+}</code></pre>
+
+            <blockquote>
+                "The best way to predict the future is to create it." - Peter Drucker
+            </blockquote>
+
+            <div class="callout info">
+                <p><strong>Tip:</strong> Type <code>/</code> to open the commands menu, or select text to see formatting options.</p>
+            </div>
+
+            <h3>Table Example</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rich Text Editor</td>
+                        <td>✅ Complete</td>
+                        <td>Markdown + WYSIWYG editing</td>
+                    </tr>
+                    <tr>
+                        <td>Real-time Sync</td>
+                        <td>⏳ In Progress</td>
+                        <td>Collaborative editing</td>
+                    </tr>
+                    <tr>
+                        <td>Graph View</td>
+                        <td>⏳ Planned</td>
+                        <td>Knowledge connections</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="image-placeholder">
+                Image Placeholder - Drag & Drop or Paste Image
+            </div>
+        </div>
+
+        <div class="editor-status">
+            <span>Press '/' for commands • Select text for formatting</span>
+            <span>Word count: <span id="word-count">0</span></span>
+        </div>
+    </div>
+
+    <!-- Floating Toolbar -->
+    <div class="floating-toolbar" id="floatingToolbar">
+        <button class="toolbar-button" data-command="bold" title="Bold">B</button>
+        <button class="toolbar-button" data-command="italic" title="Italic">I</button>
+        <button class="toolbar-button" data-command="underline" title="Underline">U</button>
+        <div class="toolbar-separator"></div>
+        <button class="toolbar-button" data-command="h1" title="Heading 1">H1</button>
+        <button class="toolbar-button" data-command="h2" title="Heading 2">H2</button>
+        <button class="toolbar-button" data-command="h3" title="Heading 3">H3</button>
+        <div class="toolbar-separator"></div>
+        <button class="toolbar-button" data-command="list-bulleted" title="Bullet List">•</button>
+        <button class="toolbar-button" data-command="list-numbered" title="Numbered List">1.</button>
+        <div class="toolbar-separator"></div>
+        <button class="toolbar-button" data-command="link" title="Insert Link">🔗</button>
+        <button class="toolbar-button" data-command="code" title="Code">Code</button>
+        <button class="toolbar-button" data-command="quote" title="Quote">❝</button>
+    </div>
+
+    <!-- Slash Commands Menu -->
+    <div class="slash-commands" id="slashCommands">
+        <div class="slash-command-item" data-command="h1">
+            <span class="slash-command-icon">H1</span>
+            <span>Heading 1</span>
+        </div>
+        <div class="slash-command-item" data-command="h2">
+            <span class="slash-command-icon">H2</span>
+            <span>Heading 2</span>
+        </div>
+        <div class="slash-command-item" data-command="h3">
+            <span class="slash-command-icon">H3</span>
+            <span>Heading 3</span>
+        </div>
+        <div class="slash-command-item" data-command="list-bulleted">
+            <span class="slash-command-icon">•</span>
+            <span>Bullet List</span>
+        </div>
+        <div class="slash-command-item" data-command="list-numbered">
+            <span class="slash-command-icon">1.</span>
+            <span>Numbered List</span>
+        </div>
+        <div class="slash-command-item" data-command="todo">
+            <span class="slash-command-icon">☐</span>
+            <span>To-do List</span>
+        </div>
+        <div class="slash-command-item" data-command="code">
+            <span class="slash-command-icon">⟧</span>
+            <span>Code Block</span>
+        </div>
+        <div class="slash-command-item" data-command="quote">
+            <span class="slash-command-icon">❝</span>
+            <span>Quote Block</span>
+        </div>
+        <div class="slash-command-item" data-command="divider">
+            <span class="slash-command-icon">—</span>
+            <span>Divider</span>
+        </div>
+        <div class="slash-command-item" data-command="table">
+            <span class="slash-command-icon">▤</span>
+            <span>Table</span>
+        </div>
+        <div class="slash-command-item" data-command="image">
+            <span class="slash-command-icon">🖼</span>
+            <span>Image</span>
+        </div>
+    </div>
+
+    <script>
+        // Floating toolbar functionality
+        const editor = document.querySelector('.editor-content');
+        const floatingToolbar = document.getElementById('floatingToolbar');
+        const slashCommands = document.getElementById('slashCommands');
+
+        // Show floating toolbar when text is selected
+        document.addEventListener('selectionchange', function() {
+            const selection = window.getSelection();
+            if (selection.toString().trim() !== '') {
+                const range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+                
+                floatingToolbar.style.top = (rect.top - 50) + 'px';
+                floatingToolbar.style.left = (rect.left + rect.width / 2) + 'px';
+                floatingToolbar.classList.add('show');
+            } else {
+                floatingToolbar.classList.remove('show');
+            }
+        });
+
+        // Hide toolbar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!floatingToolbar.contains(e.target) && !editor.contains(e.target)) {
+                floatingToolbar.classList.remove('show');
+            }
+        });
+
+        // Toolbar button functionality
+        document.querySelectorAll('.toolbar-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const command = this.getAttribute('data-command');
+                executeCommand(command);
+                
+                // Hide toolbar after command
+                floatingToolbar.classList.remove('show');
+            });
+        });
+
+        // Slash commands functionality
+        let slashMode = false;
+        let slashPosition = 0;
+
+        editor.addEventListener('input', function(e) {
+            updateWordCount();
+            
+            // Check for slash commands
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const textBefore = this.textContent.substring(0, range.startOffset);
+                
+                if (textBefore.endsWith('/')) {
+                    slashMode = true;
+                    slashPosition = range.startOffset - 1;
+                    showSlashCommands(range);
+                } else if (slashMode && !textBefore.endsWith('/', slashPosition)) {
+                    slashMode = false;
+                    slashCommands.style.display = 'none';
+                }
+            }
+        });
+
+        function showSlashCommands(range) {
+            const rect = range.getBoundingClientRect();
+            slashCommands.style.top = (rect.bottom + window.scrollY) + 'px';
+            slashCommands.style.left = (rect.left + window.scrollX) + 'px';
+            slashCommands.style.display = 'block';
+        }
+
+        document.querySelectorAll('.slash-command-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const command = this.getAttribute('data-command');
+                insertCommand(command);
+                slashCommands.style.display = 'none';
+                slashMode = false;
+            });
+        });
+
+        function insertCommand(command) {
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                
+                // Remove the '/' character
+                range.setStart(range.startContainer, range.startOffset - 1);
+                range.deleteContents();
+                
+                // Insert the formatted content based on command
+                switch(command) {
+                    case 'h1':
+                        range.insertNode(document.createElement('h1'));
+                        break;
+                    case 'h2':
+                        range.insertNode(document.createElement('h2'));
+                        break;
+                    case 'h3':
+                        range.insertNode(document.createElement('h3'));
+                        break;
+                    case 'list-bulleted':
+                        range.insertNode(document.createElement('ul'));
+                        break;
+                    case 'list-numbered':
+                        range.insertNode(document.createElement('ol'));
+                        break;
+                    case 'code':
+                        range.insertNode(document.createElement('pre'));
+                        break;
+                    case 'quote':
+                        range.insertNode(document.createElement('blockquote'));
+                        break;
+                    default:
+                        const span = document.createElement('span');
+                        span.textContent = '/' + command;
+                        range.insertNode(span);
+                }
+            }
+        }
+
+        function executeCommand(command) {
+            switch(command) {
+                case 'bold':
+                    document.execCommand('bold', false, null);
+                    break;
+                case 'italic':
+                    document.execCommand('italic', false, null);
+                    break;
+                case 'underline':
+                    document.execCommand('underline', false, null);
+                    break;
+                case 'h1':
+                    document.execCommand('formatBlock', false, 'h1');
+                    break;
+                case 'h2':
+                    document.execCommand('formatBlock', false, 'h2');
+                    break;
+                case 'h3':
+                    document.execCommand('formatBlock', false, 'h3');
+                    break;
+                case 'list-bulleted':
+                    document.execCommand('insertUnorderedList', false, null);
+                    break;
+                case 'list-numbered':
+                    document.execCommand('insertOrderedList', false, null);
+                    break;
+                case 'link':
+                    const url = prompt('Enter URL:');
+                    if (url) {
+                        document.execCommand('createLink', false, url);
+                    }
+                    break;
+                case 'code':
+                    document.execCommand('formatBlock', false, 'code');
+                    break;
+                case 'quote':
+                    document.execCommand('formatBlock', false, 'blockquote');
+                    break;
+            }
+        }
+
+        // Update word count
+        function updateWordCount() {
+            const text = editor.textContent || '';
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            document.getElementById('word-count').textContent = words.length;
+        }
+
+        // Initialize word count
+        updateWordCount();
+
+        // Close slash commands when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!slashCommands.contains(e.target) && e.target !== editor) {
+                slashCommands.style.display = 'none';
+                slashMode = false;
+            }
+        });
+
+        // Handle Enter key to prevent breaking out of editor
+        editor.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && slashMode) {
+                e.preventDefault();
+                const activeCommand = slashCommands.querySelector('.slash-command-item:hover');
+                if (activeCommand) {
+                    const command = activeCommand.getAttribute('data-command');
+                    insertCommand(command);
+                    slashCommands.style.display = 'none';
+                    slashMode = false;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoterDome - Main Application Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background-color: #222222;
+            border-bottom: 1px solid #333333;
+            height: 60px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .search-bar {
+            background-color: #333333;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: white;
+            min-width: 300px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: #1a1a1a;
+            border-right: 1px solid #333333;
+            padding: 16px;
+            overflow-y: auto;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            width: 60px;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #888888;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-section-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #888888;
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: #333333;
+        }
+
+        .nav-item.active {
+            background-color: #4f46e5;
+        }
+
+        .nav-item-icon {
+            margin-right: 8px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .nav-item-text {
+            flex: 1;
+        }
+
+        .nav-item-count {
+            background-color: #333333;
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 12px;
+        }
+
+        .new-note-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+
+        /* Editor Area */
+        .editor-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: #1a1a1a;
+        }
+
+        .editor-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #333333;
+            background-color: #1a1a1a;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        .page-title:focus {
+            outline: 2px solid #4f46e5;
+            background-color: #222222;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            gap: 8px;
+            padding: 8px 0;
+        }
+
+        .toolbar-btn {
+            padding: 6px 12px;
+            background-color: #333333;
+            border: 1px solid #444444;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .toolbar-btn:hover {
+            background-color: #444444;
+        }
+
+        .editor-content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            background-color: #1a1a1a;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            color: white;
+            border: none;
+            resize: none;
+            font-size: 16px;
+            line-height: 1.6;
+            outline: none;
+        }
+
+        /* Properties Panel */
+        .properties-panel {
+            width: 320px;
+            background-color: #1a1a1a;
+            border-left: 1px solid #333333;
+            padding: 16px;
+            overflow-y: auto;
+            transition: width 0.3s ease;
+        }
+
+        .properties-panel.collapsed {
+            width: 0;
+            padding: 16px 0;
+        }
+
+        .panel-section {
+            margin-bottom: 24px;
+        }
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-content {
+            background-color: #222222;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .property-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #333333;
+        }
+
+        .property-row:last-child {
+            border-bottom: none;
+        }
+
+        .property-label {
+            color: #888888;
+        }
+
+        .property-value {
+            color: white;
+        }
+
+        .backlink-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #333333;
+        }
+
+        .backlink-item:last-child {
+            border-bottom: none;
+        }
+
+        .backlink-title {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .backlink-title:hover {
+            text-decoration: underline;
+        }
+
+        .backlink-preview {
+            color: #888888;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* Collapsed panel placeholders */
+        .collapsed-placeholder {
+            width: 40px;
+            height: 40px;
+            background-color: #333333;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <div class="nav-left">
+                <div class="logo">NoterDome</div>
+                <input type="text" class="search-bar" placeholder="Search notes...">
+            </div>
+            <div class="nav-right">
+                <button class="toolbar-btn">Sync</button>
+                <button class="toolbar-btn">Export</button>
+                <div class="user-avatar" style="width: 32px; height: 32px; background-color: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">U</div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-title">Navigation</div>
+                    <button class="toggle-btn" onclick="toggleSidebar()">≡</button>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Notes</div>
+                    <div class="nav-item active">
+                        <span class="nav-item-icon">📄</span>
+                        <span class="nav-item-text">All Notes</span>
+                        <span class="nav-item-count">24</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">📓</span>
+                        <span class="nav-item-text">Notebooks</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">#️⃣</span>
+                        <span class="nav-item-text">Tags</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">👥</span>
+                        <span class="nav-item-text">Shared</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Recent</div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        <span class="nav-item-text">Project Ideas</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        <span class="nav-item-text">Meeting Notes</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">📝</span>
+                        <span class="nav-item-text">Research</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Tools</div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">📊</span>
+                        <span class="nav-item-text">Database Views</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">🔍</span>
+                        <span class="nav-item-text">Graph View</span>
+                    </div>
+                    <div class="nav-item">
+                        <span class="nav-item-icon">🎨</span>
+                        <span class="nav-item-text">Canvas</span>
+                    </div>
+                </div>
+
+                <button class="new-note-btn">+ New Note</button>
+            </aside>
+
+            <!-- Editor Area -->
+            <main class="editor-area">
+                <div class="editor-header">
+                    <input type="text" class="page-title" value="Welcome to NoterDome" placeholder="Untitled">
+                    <div class="editor-toolbar">
+                        <button class="toolbar-btn">B</button>
+                        <button class="toolbar-btn">I</button>
+                        <button class="toolbar-btn">U</button>
+                        <button class="toolbar-btn">H1</button>
+                        <button class="toolbar-btn">H2</button>
+                        <button class="toolbar-btn">List</button>
+                        <button class="toolbar-btn">Link</button>
+                        <button class="toolbar-btn">Code</button>
+                        <button class="toolbar-btn">/</button>
+                    </div>
+                </div>
+                <div class="editor-content">
+                    <textarea class="editor-textarea" placeholder="Start writing your note here...">Welcome to NoterDome! This is your second brain where ideas flow freely and knowledge connects naturally.
+
+You can write in markdown format:
+
+# Heading 1
+## Heading 2
+- Bullet points
+- Another item
+
+**Bold text** and *italic text*
+
+[Links to other notes](note-name)
+
+Code blocks:
+```javascript
+console.log('Hello World');
+```
+
+Tables, images, and other rich content are also supported!</textarea>
+                </div>
+            </main>
+
+            <!-- Properties Panel -->
+            <aside class="properties-panel">
+                <div class="panel-section">
+                    <div class="panel-title">
+                        Properties
+                        <button class="toggle-btn" onclick="togglePropertiesPanel()">✕</button>
+                    </div>
+                    <div class="panel-content">
+                        <div class="property-row">
+                            <span class="property-label">Created:</span>
+                            <span class="property-value">Today, 10:30 AM</span>
+                        </div>
+                        <div class="property-row">
+                            <span class="property-label">Modified:</span>
+                            <span class="property-value">Today, 10:35 AM</span>
+                        </div>
+                        <div class="property-row">
+                            <span class="property-label">Tags:</span>
+                            <span class="property-value">welcome, introduction</span>
+                        </div>
+                        <div class="property-row">
+                            <span class="property-label">Status:</span>
+                            <span class="property-value">Draft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <div class="panel-title">Backlinks</div>
+                    <div class="panel-content">
+                        <div class="backlink-item">
+                            <a href="#" class="backlink-title">Getting Started Guide</a>
+                            <div class="backlink-preview">This note references Welcome to NoterDome...</div>
+                        </div>
+                        <div class="backlink-item">
+                            <a href="#" class="backlink-title">Features Overview</a>
+                            <div class="backlink-preview">Learn more about Welcome to NoterDome...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <div class="panel-title">Templates</div>
+                    <div class="panel-content">
+                        <div class="nav-item">
+                            <span class="nav-item-icon">📄</span>
+                            <span class="nav-item-text">Meeting Notes</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-item-icon">📊</span>
+                            <span class="nav-item-text">Project Tracker</span>
+                        </div>
+                        <div class="nav-item">
+                            <span class="nav-item-icon">📝</span>
+                            <span class="nav-item-text">Journal Entry</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('collapsed');
+        }
+
+        function togglePropertiesPanel() {
+            const panel = document.querySelector('.properties-panel');
+            panel.classList.toggle('collapsed');
+        }
+
+        // Mock functionality for demonstration
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

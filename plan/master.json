@@ -1,0 +1,38 @@
+{
+  "PRD_md": "1Unified Ultimate PRD.md",
+  "Timeline": "Timeline.json",
+  "Tasklist": {
+    "Design": [
+      "Tasklist/Design/UI_UX.md",
+      "Tasklist/Design/Branding.md"
+    ],
+    "Engineering": {
+      "Frontend": [
+        "Tasklist/Engineering/Frontend/Feature.md",
+        "Tasklist/Engineering/Frontend/Analytics.md"
+      ],
+      "Backend": [
+        "Tasklist/Engineering/Backend/API.md",
+        "Tasklist/Engineering/Backend/Infrastructure.md"
+      ]
+    },
+    "QA": [
+      "Tasklist/QA/Unit.md",
+      "Tasklist/QA/Integration.md",
+      "Tasklist/QA/UAT.md"
+    ],
+    "Marketing": [
+      "Tasklist/Marketing/Campaign.md"
+    ],
+    "Research": [
+      "Tasklist/Research/UserFeedback.md"
+    ],
+    "DevOps": [
+      "Tasklist/DevOps/CI_CD.md"
+    ],
+    "Documentation": [
+      "Tasklist/Documentation/Guides.md"
+    ]
+  },
+  "QA_Risk": "QA_Risk.json"
+}
